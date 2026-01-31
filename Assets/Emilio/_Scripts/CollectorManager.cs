@@ -21,6 +21,7 @@ public class CollectorManager : MonoBehaviour
         {
             Debug.Log("Trigger entered by: " + baby.gameObject.name);
             BabyCount++;
+            NotificationManager.NotifyBabyCollection(BabyCount);
             Debug.Log("Babies "+ BabyCount);
             baby.enabled = false; 
             Destroy(baby.gameObject);
