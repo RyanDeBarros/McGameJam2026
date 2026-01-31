@@ -3,12 +3,14 @@ using UnityEngine;
 public class SpawnerManager : MonoBehaviour
 {
     private GameObject[] SpawnersDetected;
-    private GameObject[] Spawners;
+    //private GameObject[] Spawners;
     [SerializeField] GameObject Baby;
     
     private bool RandomValue; 
     private string Tag = "Spawner";
     private Transform SpawnTransform;
+
+    public int Amount = 1;
 
 
     private void Awake()
@@ -20,21 +22,15 @@ public class SpawnerManager : MonoBehaviour
         //Random value between 0 and the number of Spawners found 
         //RandomValue = Random.Range(0, SpawnersDetected.Length);
 
-        for (int i = 0; i < SpawnersDetected.Length; i++)
+        for (int i = 0; i < Amount; i++)
         {
-            RandomValue = Random.value < .5f;
-            if (RandomValue)
-            {
-                Debug.Log("Spawner " + i + " active");
-                Instantiate(Baby, SpawnersDetected[i].transform.position, SpawnersDetected[i].transform.rotation);
+            int randomIndex = Random.Range(0, SpawnersDetected.Length);
+            Transform spawnPoint = SpawnersDetected[randomIndex].transform;
 
-            }
-            else
-            {
-                Debug.Log("Spawner " + i + " inactive");
-            }
+            Instantiate(Baby, spawnPoint.position, spawnPoint.rotation);
+
+            Debug.Log("Spawned Baby at spawner " + randomIndex);
         }
-
 
     }
 
