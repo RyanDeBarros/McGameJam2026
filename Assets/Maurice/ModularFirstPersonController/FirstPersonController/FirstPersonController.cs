@@ -16,6 +16,7 @@ using UnityEngine.UI;
 
 public class FirstPersonController : MonoBehaviour
 {
+    public Animator animator;
     private Rigidbody rb;
 
     #region Camera Movement Variables
@@ -202,7 +203,10 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
-
+        if (Input.GetButtonDown("Fire1"))
+        {
+            animator.SetTrigger("grab");
+        }
         // Control camera movement
         if(cameraCanMove)
         {
@@ -530,7 +534,7 @@ public class FirstPersonController : MonoBehaviour
 }
 
 
-
+/*
 // Custom Editor
 #if UNITY_EDITOR
     [CustomEditor(typeof(FirstPersonController)), InitializeOnLoadAttribute]
@@ -740,4 +744,4 @@ public class FirstPersonController : MonoBehaviour
 
 }
 
-#endif
+#endif*/
