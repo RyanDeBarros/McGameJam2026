@@ -5,7 +5,6 @@ public class InvestigateBehavior : StateMachineBehaviour
 {
     public float investigationThreshold = 4.5f;
     public float investigationTime = 4.0f;
-    public float stoppingDistance = 1.2f;
     public float rotationRate = 10f;
     public float sightRadius = 5f;
     [Range(0, 360)]
@@ -21,6 +20,7 @@ public class InvestigateBehavior : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
         player = GameObject.FindGameObjectWithTag("MC");
         agent = animator.GetComponent<NavMeshAgent>();
         lastPositionPlayer = player.transform.position;
@@ -30,15 +30,16 @@ public class InvestigateBehavior : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        agent.SetDestination(lastPositionPlayer);
-        if (Vector3.Distance(lastPositionPlayer, agent.transform.position) <= stoppingDistance) {
             time += Time.deltaTime;
-            animator.transform.Rotate(0.0f, Time.deltaTime * rotationRate, 0.0f);
+            //animator.transform.Rotate(0.0f, Time.deltaTime * rotationRate, 0.0f);
             if (time > investigationTime) {
-                animator.SetBool("isPlayerVanished", true);
+            animator.SetBool("isInvestigating", false); //reseting the investigation
+            animator.SetBool("isPlayerVanished", true);
+            return;
             }
-        }
-        if (isPlayerSeen()) {
+        if (isPlayerSeen())
+        {
+            animator.SetBool("isInvestigating", false); //reseting the investigation
             animator.SetBool("isPlayerSeen", true);
         }
     }
@@ -57,7 +58,9 @@ public class InvestigateBehavior : StateMachineBehaviour
                 float distanceToTarget = Vector3.Distance(agent.transform.position, target.position);
 
                 if (!Physics.Raycast(agent.transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                {
                     return true;
+                }
             }
         }
 

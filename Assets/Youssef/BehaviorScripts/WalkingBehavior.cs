@@ -1,56 +1,47 @@
-using System.Collections.Generic;
-using System.Linq;
-using Unity.Mathematics;
-using UnityEditor.Rendering.Universal;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PatrolBehavior : StateMachineBehaviour
+public class WalkingBehavior : StateMachineBehaviour
 {
-    public int tresholdIndex = 4;
+    public float stoppingDistance = 1.2f;
+
     public float sightRadius = 5f;
     [Range(0, 360)]
     public float sightAngle = 100f;
     public LayerMask targetMask; //set layers in scene
     public LayerMask obstructionMask; //set layers in scene
 
-
-    private List<GameObject> navPoints;
     private GameObject player;
     private NavMeshAgent agent;
+    private Vector3 lastPositionPlayer;
+    private float time;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("we here");
         player = GameObject.FindGameObjectWithTag("MC");
         agent = animator.GetComponent<NavMeshAgent>();
-        navPoints = GameObject.FindGameObjectsWithTag("navPoint").ToList();
+        lastPositionPlayer = player.transform.position;
+        time = 0;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        navPoints.Sort((nav1, nav2) => {
-            float dist1 = (player.transform.position - nav1.transform.position).sqrMagnitude;
-            float dist2 = (player.transform.position - nav2.transform.position).sqrMagnitude;
-            return dist1.CompareTo(dist2);
-        });
-        agent.SetDestination(navPoints[UnityEngine.Random.Range(0,math.clamp(tresholdIndex, 0, navPoints.Count()))].transform.position);
-
-        if (isPlayerSeen())
+        agent.SetDestination(lastPositionPlayer);
+        if (Vector3.Distance(lastPositionPlayer, agent.transform.position) <= stoppingDistance)
         {
-            animator.SetBool("isPlayerSeen", true);
+            animator.SetBool("isInvestigating", true);
+            return;
         }
-        
+        animator.SetBool("isPlayerSeen", isPlayerSeen());
     }
-    //This functions is used in three diff behavior scripts. for now keep it like that.
     private bool isPlayerSeen()
     {
         Collider[] rangeChecks = Physics.OverlapSphere(agent.transform.position, sightRadius, targetMask);
 
         if (rangeChecks.Length != 0)
         {
-            //only possible to get a player, using first index
+            //only possible to get a player
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - agent.transform.position).normalized;
 
@@ -59,14 +50,14 @@ public class PatrolBehavior : StateMachineBehaviour
                 float distanceToTarget = Vector3.Distance(agent.transform.position, target.position);
 
                 if (!Physics.Raycast(agent.transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                {
                     return true;
+                }
             }
         }
 
         return false;
     }
-}
-
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
@@ -84,4 +75,4 @@ public class PatrolBehavior : StateMachineBehaviour
     //{
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
-
+}
