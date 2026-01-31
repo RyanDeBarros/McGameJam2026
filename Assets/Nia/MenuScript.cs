@@ -1,29 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Diagnostics;
 
-public class RunExeOnExit : MonoBehaviour
-{
-void OnApplicationQuit()
-{
-#if UNITY_EDITOR
-    UnityEditor.EditorApplication.quitting += RunExe;
-#else
-    RunExe();
-#endif
-}
-
-void RunExe()
-{
-
-    string exePath = System.IO.Path.Combine(
-    Application.dataPath,
-    "../Assets/Nia/Popup 4th Wall/popup.exe");
-
-Process.Start(exePath);
-
-}
-}
 
 public class MainMenu : MonoBehaviour
 {
@@ -32,27 +9,26 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
+        UnityEngine.Debug.Log("Play");
         SceneManager.LoadScene("GameScene");
     }
 
     public void QuitGame()
     {
+        UnityEngine.Debug.Log("quit");
         Application.Quit();
     }
 
-    public void OpenOptions()
-    {
-        
-        
-    }
 
     public void ShowCredits()
     {
+         UnityEngine.Debug.Log("Credits");
         creditsPanel.SetActive(true);
     }
 
     public void HideCredits()
     {
+        UnityEngine.Debug.Log("Credits Closed");
         creditsPanel.SetActive(false);
     }
 }
