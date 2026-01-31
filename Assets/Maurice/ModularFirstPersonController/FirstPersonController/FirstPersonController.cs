@@ -16,7 +16,7 @@ using UnityEngine.UI;
 
 public class FirstPersonController : MonoBehaviour
 {
-    public Animator animator;
+    public bool lsd_mode;
     private Rigidbody rb;
 
     #region Camera Movement Variables
@@ -57,7 +57,7 @@ public class FirstPersonController : MonoBehaviour
     #region Movement Variables
 
     public bool playerCanMove = true;
-    public float walkSpeed = 5f;
+    public static float walkSpeed = 5f;
     public float maxVelocityChange = 10f;
 
     // Internal Variables
@@ -134,6 +134,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void Awake()
     {
+        lsd_mode = false;
         rb = GetComponent<Rigidbody>();
 
         crosshairObject = GetComponentInChildren<Image>();
@@ -203,10 +204,6 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            animator.SetTrigger("grab");
-        }
         // Control camera movement
         if(cameraCanMove)
         {

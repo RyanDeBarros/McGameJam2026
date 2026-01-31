@@ -5,7 +5,7 @@ using UnityEngine.Rendering.Universal;
 public class CameraEffectsController : MonoBehaviour
 {
     public Volume volume;
-    [SerializeField]private bool distort;
+    public static bool distort;
     private ColorAdjustments colorAdjustments;
     private Bloom bloom;
     private ChromaticAberration chromatic;

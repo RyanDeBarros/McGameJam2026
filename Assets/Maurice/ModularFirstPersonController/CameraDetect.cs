@@ -1,0 +1,94 @@
+using UnityEngine;
+
+public class CameraDetect : MonoBehaviour
+{
+    public Animator animator;
+    public string Holding;
+    public GameObject heldItem;
+    ILookable currentLooked;
+    GameObject currentLookedObject;
+    private float speedTimer=0;
+    public GameObject spray;
+    public GameObject sprayPoint;
+    public float grabDistance = 3f;
+
+    void Update()
+    {
+        if( speedTimer > 0 ) 
+            speedTimer -= Time.deltaTime;
+        else
+        {
+            CameraEffectsController.distort = false;
+            FirstPersonController.walkSpeed = 5;
+        }    
+
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+
+        ILookable newLooked = null;
+        GameObject newLookedObject = null;
+
+        if (Physics.Raycast(ray, out hit, grabDistance))
+        {
+            newLooked = hit.collider.GetComponent<ILookable>();
+            newLookedObject = hit.collider.gameObject;
+        }
+
+        if (newLooked != currentLooked)
+        {
+            if (currentLooked != null)
+                currentLooked.OnLookExit();
+
+            if (newLooked != null)
+                newLooked.OnLookEnter();
+
+            currentLooked = newLooked;
+            currentLookedObject = newLookedObject;
+        }
+
+        // GRAB LOGIC
+        if (Input.GetButtonDown("Fire2") && currentLookedObject != null)
+        {
+            animator.SetTrigger("grab");
+
+            Holding = currentLookedObject.tag;  // store tag
+            Destroy(currentLookedObject.transform.root.gameObject);      // delete object
+            animator.SetBool("Holding",true);
+            heldItem.SetActive(true);
+            currentLooked = null;
+            currentLookedObject = null;
+        }
+        if (Input.GetButtonDown("Fire1")){
+            if (Holding == null) return;
+            if(Holding == "LSD")
+            {
+                animator.SetTrigger("Drinking");
+                FirstPersonController.walkSpeed = 2;
+            }
+            if (Holding == "Spray")
+            {
+                Instantiate(spray, sprayPoint.transform.position, sprayPoint.transform.rotation, sprayPoint.transform);
+                animator.SetTrigger("Spraying");
+                FirstPersonController.walkSpeed = 2;
+                animator.SetBool("Holding", false);
+            }
+        }
+    }
+    public void FinishDrinking()
+    {
+        speedTimer = 10;
+        CameraEffectsController.distort = true;
+        FirstPersonController.walkSpeed = 10;
+        animator.SetBool("Holding", false);
+        heldItem.SetActive(false);
+        Holding = null;
+        
+    }
+    public void SprayingDrinking()
+    {
+        animator.SetBool("Holding", false);
+        heldItem.SetActive(false);
+        Holding = null;
+
+    }
+}
