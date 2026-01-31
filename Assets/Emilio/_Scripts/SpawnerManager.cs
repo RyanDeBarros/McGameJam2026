@@ -13,7 +13,8 @@ public class SpawnerManager : MonoBehaviour
     private bool RandomValue; 
     private string Tag = "Spawner";
 
-    public int Amount = 1;
+    //public int Amount = 1;
+    public static int Amount = 3;
 
     private void Awake()
     {

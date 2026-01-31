@@ -8,6 +8,7 @@ public class CollectorManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public int BabyCount;
+    private int BabySpawned;
     //private bool IsCounted;
 
     void Start()
@@ -19,12 +20,18 @@ public class CollectorManager : MonoBehaviour
     {
        if (baby.CompareTag("Baby"))
         {
-            Debug.Log("Trigger entered by: " + baby.gameObject.name);
+            //Debug.Log("Trigger entered by: " + baby.gameObject.name);
             BabyCount++;
-            NotificationManager.NotifyBabyCollection(BabyCount);
-            Debug.Log("Babies "+ BabyCount);
+            NotificationManager.NotifyBabyCollection(BabySpawned-BabyCount);
+            //Debug.Log("Babies "+ BabyCount);
             baby.enabled = false; 
             Destroy(baby.gameObject);
         }
     }
+
+    private void Update()
+    {
+        BabySpawned = SpawnerManager.Amount;
+    }
+
 }
