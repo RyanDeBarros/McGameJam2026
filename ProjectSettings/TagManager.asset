@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Baby
   - Spawner
+  - Mom
   layers:
   - Default
   - TransparentFX
