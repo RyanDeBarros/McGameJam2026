@@ -32,6 +32,12 @@ public class CollectorManager : MonoBehaviour
     private void Update()
     {
         BabySpawned = SpawnerManager.Amount;
+        if (BabyCount == BabySpawned)
+        {
+            NotificationManager.NotifyBabyCompletion();
+
+        }
+
     }
 
 }
