@@ -169,6 +169,11 @@ public class MinimapManager : MonoBehaviour
     // Public hook if your spawners/despawners want to force an immediate refresh
     public void NotifyEnemiesChanged() => RefreshAll();
 
+    public Vector2 GetPlayerPosition()
+    {
+        return playerDot.anchoredPosition;
+    }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
