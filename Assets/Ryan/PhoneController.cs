@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
@@ -15,6 +16,9 @@ public class PhoneController : MonoBehaviour
     [SerializeField] private float toggleAnimationSpeed = 5f;
     private Coroutine visualAnimation = null;
 
+    [Header("Notifications")]
+    [SerializeField] private RectTransform notificationRoot;
+
     private PlayerInput playerInput;
     private InputAction toggleAction;
 
@@ -24,6 +28,8 @@ public class PhoneController : MonoBehaviour
         Assert.IsNotNull(openedVisual);
         Assert.IsNotNull(closedVisual);
         SetPhoneTransform();
+
+        Assert.IsNotNull(notificationRoot);
 
         playerInput = GetComponent<PlayerInput>();
         Assert.IsNotNull(playerInput);
@@ -101,8 +107,31 @@ public class PhoneController : MonoBehaviour
 
     private void SetPhoneTransform()
     {
-        visual.transform.localScale = Vector3.Lerp(closedVisual.localScale, openedVisual.localScale, openedFactor);
-        visual.transform.position = Vector3.Lerp(closedVisual.position, openedVisual.position, openedFactor);
-        visual.transform.rotation = Quaternion.Slerp(closedVisual.rotation, openedVisual.rotation, openedFactor);
+        RectTransform v = visual;
+        RectTransform closed = closedVisual;
+        RectTransform opened = openedVisual;
+
+        v.anchorMin = Vector2.Lerp(closed.anchorMin, opened.anchorMin, openedFactor);
+        v.anchorMax = Vector2.Lerp(closed.anchorMax, opened.anchorMax, openedFactor);
+        v.pivot = Vector2.Lerp(closed.pivot, opened.pivot, openedFactor);
+
+        v.anchoredPosition = Vector2.Lerp(closed.anchoredPosition, opened.anchoredPosition, openedFactor);
+        v.sizeDelta = Vector2.Lerp(closed.sizeDelta, opened.sizeDelta, openedFactor);
+        v.localRotation = Quaternion.Slerp(closed.localRotation, opened.localRotation, openedFactor);
+    }
+
+    public Transform GetNotificationRoot()
+    {
+        return notificationRoot;
+    }
+
+    public bool IsOpen()
+    {
+        return open;
+    }
+
+    public static PhoneController GetInstance()
+    {
+        return GameObject.FindObjectsByType<PhoneController>(FindObjectsSortMode.None).First();
     }
 }
