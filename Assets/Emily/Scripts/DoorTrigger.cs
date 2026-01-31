@@ -50,7 +50,6 @@ public class DoorTrigger : MonoBehaviour
 
     private IEnumerator FadeAndLeave()
     {
-        Debug.Log("Leaving house");
         text.SetActive(false);
         blackScreen.SetActive(true);
         yield return new WaitForSeconds(duration);
