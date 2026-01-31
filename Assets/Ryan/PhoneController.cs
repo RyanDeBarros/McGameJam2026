@@ -15,9 +15,11 @@ public class PhoneController : MonoBehaviour
     [SerializeField] private RectTransform closedVisual;
     [SerializeField] private float toggleAnimationSpeed = 5f;
     private Coroutine visualAnimation = null;
+    [SerializeField] private RectTransform blackScreen;
 
     [Header("Notifications")]
     [SerializeField] private RectTransform notificationRoot;
+    [SerializeField] private AudioSource notificationSound;
 
     private PlayerInput playerInput;
     private InputAction toggleAction;
@@ -29,7 +31,11 @@ public class PhoneController : MonoBehaviour
         Assert.IsNotNull(closedVisual);
         SetPhoneTransform();
 
+        Assert.IsNotNull(blackScreen);
+        blackScreen.gameObject.SetActive(true);
+
         Assert.IsNotNull(notificationRoot);
+        Assert.IsNotNull(notificationSound);
 
         playerInput = GetComponent<PlayerInput>();
         Assert.IsNotNull(playerInput);
@@ -81,6 +87,8 @@ public class PhoneController : MonoBehaviour
             SetPhoneTransform();
             yield return null;
         }
+
+        blackScreen.gameObject.SetActive(false);
     }
 
     public void ClosePhone()
@@ -96,6 +104,8 @@ public class PhoneController : MonoBehaviour
 
     private IEnumerator ClosePhoneAnimation()
     {
+        blackScreen.gameObject.SetActive(true);
+
         while (openedFactor > 0f)
         {
             openedFactor -= toggleAnimationSpeed * Time.deltaTime;
@@ -128,6 +138,11 @@ public class PhoneController : MonoBehaviour
     public bool IsOpen()
     {
         return open;
+    }
+
+    public void PlayNotificationSound()
+    {
+        notificationSound.Play();
     }
 
     public static PhoneController GetInstance()

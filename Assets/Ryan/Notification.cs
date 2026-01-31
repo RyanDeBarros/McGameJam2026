@@ -2,20 +2,21 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.UI;
 
 public class Notification : MonoBehaviour
 {
-    [SerializeField] private Transform visualRoot;
     [SerializeField] private TextMeshProUGUI message;
     [SerializeField] private float lifetime = 5f;
 
     private Coroutine lifeRoutine;
+    private CanvasGroup canvasGroup;
 
     private void Awake()
     {
-        Assert.IsNotNull(visualRoot);
         Assert.IsNotNull(message);
+
+        canvasGroup = GetComponent<CanvasGroup>();
+        Assert.IsNotNull(canvasGroup);
     }
 
     public void SetMessage(string m)
@@ -25,14 +26,12 @@ public class Notification : MonoBehaviour
 
     public void DisableVisual()
     {
-        visualRoot.gameObject.SetActive(false);
+        canvasGroup.alpha = 0f;
     }
 
     public void EnableVisual()
     {
-        visualRoot.gameObject.SetActive(true);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(visualRoot.GetComponent<RectTransform>());
-        message.ForceMeshUpdate();
+        canvasGroup.alpha = 1f;
     }
 
     public void StartTimer()

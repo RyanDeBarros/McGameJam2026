@@ -73,6 +73,8 @@ public class NotificationManager : MonoBehaviour
             // TODO animate motion
         }
 
+        PhoneController.GetInstance().PlayNotificationSound();
+
         RectTransform notifRect = notification.GetComponent<RectTransform>();
         notifRect.SetParent(PhoneController.GetInstance().GetNotificationRoot(), false);
         notifRect.anchorMin = new Vector2(0, 1);
