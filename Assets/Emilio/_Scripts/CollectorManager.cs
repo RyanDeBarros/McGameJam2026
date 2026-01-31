@@ -21,9 +21,18 @@ public class CollectorManager : MonoBehaviour
         {
             //Debug.Log("Trigger entered by: " + baby.gameObject.name);
             BabyCount++;
-            NotificationManager.NotifyBabyCollection(BabySpawned-BabyCount);
+            baby.enabled = false;
+            if (BabyCount == BabySpawned)
+            {
+                NotificationManager.NotifyBabyCompletion();
+                SceneManager.LoadScene("EndScene");
+            }
+            else
+            {
+                NotificationManager.NotifyBabyCollection(BabySpawned - BabyCount);
+            }
+
             //Debug.Log("Babies "+ BabyCount);
-            baby.enabled = false; 
             Destroy(baby.gameObject);
         }
     }
@@ -31,13 +40,6 @@ public class CollectorManager : MonoBehaviour
     private void Update()
     {
         BabySpawned = SpawnerManager.Amount;
-        if (BabyCount == BabySpawned)
-        {
-            NotificationManager.NotifyBabyCompletion();
-            SceneManager.LoadScene("EndScene");
-        }
-        
-
     }
 
 }
