@@ -37,6 +37,7 @@ public class CollectorManager : MonoBehaviour
             NotificationManager.NotifyBabyCompletion();
 
         }
+        
 
     }
 

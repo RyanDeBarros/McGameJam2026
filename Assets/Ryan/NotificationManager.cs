@@ -139,7 +139,7 @@ public class NotificationManager : MonoBehaviour
 
     public static void NotifyBabyCompletion()
     {
-        GetInstance().Notify($"You collected all babies. CONGRATULATIONS"); // TODO better message format
+        GetInstance().Notify($"You collected all babies. CONGRATULATIONS..."); // TODO better message format
     }
     public static void NotifyBabyNearby()
     {

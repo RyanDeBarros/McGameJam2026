@@ -14,7 +14,7 @@ public class SpawnerManager : MonoBehaviour
     private string Tag = "Spawner";
 
     //public int Amount = 1;
-    public static int Amount = 3;
+    public static int Amount = 1;
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class SpawnerManager : MonoBehaviour
         //Debug.Log("Found " + SpawnersDetected.Length);
 
         //Random value between 0 and the number of Spawners found 
-        //RandomValue = Random.Range(0, SpawnersDetected.Length);
+        Amount = Random.Range(0, SpawnersDetected.Count);
 
         Amount = Mathf.Min(Amount, SpawnersDetected.Count);
 
