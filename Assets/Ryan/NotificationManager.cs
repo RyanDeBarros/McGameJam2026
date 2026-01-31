@@ -111,7 +111,7 @@ public class NotificationManager : MonoBehaviour
 
     public static void NotifyBabyStart(int numBabiesToCollect)
     {
-        GetInstance().Notify($"You have {numBabiesToCollect} bab{(numBabiesToCollect != 1 ? "ies" : "y")} to collect."); // TODO better message format
+        GetInstance().Notify($"You have {numBabiesToCollect} bab{(numBabiesToCollect != 1 ? "ies" : "y")} to find."); // TODO better message format
     }
 
     public static void NotifyBabyCollection(int babiesLeft)
@@ -126,7 +126,7 @@ public class NotificationManager : MonoBehaviour
 
     public static void NotifyBabyNearby()
     {
-        GetInstance().Notify($"A baby is nearby!"); // TODO better message format
+        GetInstance().Notify("A baby is nearby!"); // TODO better message format
     }
 
     public static void NotifyDistraction()

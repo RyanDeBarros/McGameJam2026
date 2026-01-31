@@ -164,8 +164,6 @@ public class MinimapManager : MonoBehaviour
             float s = Mathf.Clamp(minimapRect.rect.width, 64f, 1024f) / 32f;
             dot.sizeDelta = new Vector2(s, s);
         }
-
-        // TODO rotation
     }
 
     void RotateDot(RectTransform dot, Vector3 forward)
