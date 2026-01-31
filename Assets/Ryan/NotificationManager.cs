@@ -142,7 +142,7 @@ public class NotificationManager : MonoBehaviour
         GetInstance().Notify($"A baby is nearby!"); // TODO better message format
     }
 
-    public static void NotifyDistraction() // TODO start sending distractions at increasing rate after delay when phone is toggled open
+    public static void NotifyDistraction()
     {
         // TODO different icon?
         GetInstance().Notify(GetInstance().distractionMessages.GetRandomElement());
