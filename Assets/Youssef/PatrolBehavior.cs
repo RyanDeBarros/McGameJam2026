@@ -21,6 +21,7 @@ public class PatrolBehavior : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        Debug.Log("we here");
         player = GameObject.FindGameObjectWithTag("MC");
         agent = animator.GetComponent<NavMeshAgent>();
         navPoints = GameObject.FindGameObjectsWithTag("navPoint").ToList();
@@ -34,7 +35,7 @@ public class PatrolBehavior : StateMachineBehaviour
             float dist2 = (player.transform.position - nav2.transform.position).sqrMagnitude;
             return dist1.CompareTo(dist2);
         });
-        agent.SetDestination(navPoints[UnityEngine.Random.Range(0,tresholdIndex)].transform.position);
+        agent.SetDestination(navPoints[UnityEngine.Random.Range(0,math.clamp(tresholdIndex, 0, navPoints.Count()))].transform.position);
 
         if (isPlayerSeen())
         {

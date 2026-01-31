@@ -5,7 +5,8 @@ public class InvestigateBehavior : StateMachineBehaviour
 {
     public float investigationThreshold = 4.5f;
     public float investigationTime = 4.0f;
-    public float rotationRate = 1f;
+    public float stoppingDistance = 1.2f;
+    public float rotationRate = 10f;
     public float sightRadius = 5f;
     [Range(0, 360)]
     public float sightAngle = 100f;
@@ -21,6 +22,7 @@ public class InvestigateBehavior : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameObject.FindGameObjectWithTag("MC");
+        agent = animator.GetComponent<NavMeshAgent>();
         lastPositionPlayer = player.transform.position;
         time = 0;
     }
@@ -28,18 +30,15 @@ public class InvestigateBehavior : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Vector3.Distance(agent.transform.position, lastPositionPlayer) <= investigationThreshold)
-        {
+        agent.SetDestination(lastPositionPlayer);
+        if (Vector3.Distance(lastPositionPlayer, agent.transform.position) <= stoppingDistance) {
             time += Time.deltaTime;
             animator.transform.Rotate(0.0f, Time.deltaTime * rotationRate, 0.0f);
-            if (time >= investigationTime) {
+            if (time > investigationTime) {
                 animator.SetBool("isPlayerVanished", true);
             }
         }
-        else {
-            agent.SetDestination(lastPositionPlayer);
-        }
-        if (isPlayerSeen()) { 
+        if (isPlayerSeen()) {
             animator.SetBool("isPlayerSeen", true);
         }
     }

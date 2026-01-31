@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Baby
   - Spawner
+  - navPoint
+  - MC
   layers:
   - Default
   - TransparentFX

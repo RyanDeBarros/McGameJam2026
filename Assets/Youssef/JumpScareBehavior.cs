@@ -15,8 +15,7 @@ public class JumpScareBehavior : StateMachineBehaviour
     {
         animator.SetBool("JumpScareTrigger", false);
         time = 0;
-        player = GameObject.FindGameObjectWithTag("MC");
-        Camera cam = player.GetComponentInChildren<Camera>();
+        Camera cam = GameObject.FindGameObjectWithTag("Main Camera").GetComponent<Camera>();
 
         Transform camPoint = animator.transform.Find("JumpscareCameraPoint");
         cam.transform.position = camPoint.position;

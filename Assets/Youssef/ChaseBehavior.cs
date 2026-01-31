@@ -26,15 +26,15 @@ public class ChaseBehavior : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         lastPositionPlayer = player.transform.position;
-        if (!isPlayerSeen())
+        if (isPlayerSeen())
         { 
             agent.SetDestination(lastPositionPlayer);
-            if (Vector3.Distance(agent.transform.position, lastPositionPlayer) <= jumpScareDistance) { 
-
+            if (Vector3.Distance(agent.transform.position, lastPositionPlayer) <= jumpScareDistance) {
+                animator.SetBool("JumpScareTrigger", true);
             }
-        }
-        else {
+        }else {
             animator.SetBool("isPlayerSeen", false);
+            Debug.Log("Going back to Patrol");
         }
     }
     private bool isPlayerSeen()
