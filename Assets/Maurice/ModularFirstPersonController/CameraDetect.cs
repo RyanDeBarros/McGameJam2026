@@ -9,12 +9,20 @@ public class CameraDetect : MonoBehaviour
     GameObject currentLookedObject;
     private float speedTimer=0;
     public GameObject spray;
+    public GameObject LSD;
+    public GameObject Spray;
     public GameObject sprayPoint;
     public float grabDistance = 3f;
+    public GameObject LSDprefab;
+    public GameObject SprayPrefab;
 
     void Update()
     {
-        if( speedTimer > 0 ) 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            DropItem();
+        }
+        if ( speedTimer > 0 ) 
             speedTimer -= Time.deltaTime;
         else
         {
@@ -47,7 +55,7 @@ public class CameraDetect : MonoBehaviour
         }
 
         // GRAB LOGIC
-        if (Input.GetButtonDown("Fire2") && currentLookedObject != null)
+        if (Input.GetButtonDown("Fire2") && currentLookedObject != null && Holding!="LSD" && Holding != "Spray")
         {
             animator.SetTrigger("grab");
 
@@ -55,6 +63,10 @@ public class CameraDetect : MonoBehaviour
             Destroy(currentLookedObject.transform.root.gameObject);      // delete object
             animator.SetBool("Holding",true);
             heldItem.SetActive(true);
+            if (Holding == "LSD") { LSD.SetActive(true); Spray.SetActive(false); }
+            else { LSD.SetActive(false); Spray.SetActive(true); }
+
+
             currentLooked = null;
             currentLookedObject = null;
         }
@@ -91,4 +103,32 @@ public class CameraDetect : MonoBehaviour
         Holding = null;
 
     }
+    void DropItem()
+    {
+        if (Holding == null) return;
+
+        GameObject prefabToSpawn = null;
+
+        if (Holding == "LSD")
+            prefabToSpawn = LSDprefab;
+        else if (Holding == "Spray")
+            prefabToSpawn = SprayPrefab;
+
+        if (prefabToSpawn != null)
+        {
+            Vector3 spawnPosition = transform.position + transform.forward * 1.5f;
+            spawnPosition.y = 0.85f; // slight lift
+
+            Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+        }
+
+        // Reset holding state
+        animator.SetBool("Holding", false);
+        heldItem.SetActive(false);
+        LSD.SetActive(false);
+        Spray.SetActive(false);
+
+        Holding = null;
+    }
+
 }
