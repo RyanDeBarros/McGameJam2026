@@ -135,7 +135,7 @@ public class PhoneController : MonoBehaviour
         return notificationRoot;
     }
 
-    public bool IsOpen()
+    public bool IsOpen() // TODO slow player speed when phone is open
     {
         return open;
     }

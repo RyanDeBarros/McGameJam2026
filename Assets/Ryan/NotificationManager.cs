@@ -6,11 +6,15 @@ using UnityEngine.Assertions;
 
 public class NotificationManager : MonoBehaviour
 {
+    [Header("Notification UI")]
     [SerializeField] private GameObject notificationPrefab;
     [SerializeField] float notificationSpacing = 50f;
     [SerializeField] private int maxNotifications = 4;
     [SerializeField] private float scrollSpeed = 500f;
     [SerializeField] private float swipeSpeed = 1000f;
+
+    [Header("Messages")]
+    [SerializeField] private List<string> distractionMessages = new();
 
     private readonly List<Notification> notifications = new();
     private readonly List<Notification> waitingQueue = new();
@@ -33,11 +37,11 @@ public class NotificationManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         NotifyBabyCollection(5);
         yield return new WaitForSeconds(1f);
-        NotifyDistraction("SiNgLe MaReS iN yOuR aReA");
+        NotifyDistraction();
         yield return new WaitForSeconds(1f);
         NotifyBabyNearby();
         yield return new WaitForSeconds(1f);
-        NotifyDistraction("New iOS update");
+        NotifyDistraction();
         yield return new WaitForSeconds(1f);
         NotifyBabyCollection(4);
     }
@@ -151,9 +155,9 @@ public class NotificationManager : MonoBehaviour
         GetInstance().Notify($"A baby is nearby!"); // TODO better message format
     }
 
-    public static void NotifyDistraction(string message)
+    public static void NotifyDistraction() // TODO start sending distractions at increasing rate after delay when phone is toggled open
     {
         // TODO different icon?
-        GetInstance().Notify(message); // TODO randomly select from list of distraction strings
+        GetInstance().Notify(GetInstance().distractionMessages.GetRandomElement());
     }
 }

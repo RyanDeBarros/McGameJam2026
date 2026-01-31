@@ -316,6 +316,10 @@ MonoBehaviour:
   notificationSpacing: 44
   maxNotifications: 4
   scrollSpeed: 500
+  swipeSpeed: 1000
+  distractionMessages:
+  - SiNgLe MaReS iN yOuR aReA
+  - New iOS update
 --- !u!82 &2462411960036118485
 AudioSource:
   m_ObjectHideFlags: 0
