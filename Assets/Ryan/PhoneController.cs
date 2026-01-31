@@ -140,6 +140,16 @@ public class PhoneController : MonoBehaviour
         return open;
     }
 
+    public float GetScreenWidth()
+    {
+        return blackScreen.rect.width;
+    }
+
+    public float GetScreenHeight()
+    {
+        return blackScreen.rect.height;
+    }
+
     public void PlayNotificationSound()
     {
         notificationSound.Play();

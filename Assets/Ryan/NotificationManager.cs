@@ -9,6 +9,8 @@ public class NotificationManager : MonoBehaviour
     [SerializeField] private GameObject notificationPrefab;
     [SerializeField] float notificationSpacing = 50f;
     [SerializeField] private int maxNotifications = 4;
+    [SerializeField] private float scrollSpeed = 500f;
+    [SerializeField] private float swipeSpeed = 1000f;
 
     private readonly List<Notification> notifications = new();
     private readonly List<Notification> waitingQueue = new();
@@ -67,11 +69,7 @@ public class NotificationManager : MonoBehaviour
     private void SendNotificationUI(Notification notification)
     {
         for (int i = 0; i < notifications.Count; ++i)
-        {
-            RectTransform rt = notifications[i].GetComponent<RectTransform>();
-            rt.anchoredPosition += Vector2.down * notificationSpacing;
-            // TODO animate motion
-        }
+            StartCoroutine(AnimateNotificationScroll(notifications[i], Vector2.down, scrollSpeed, notificationSpacing));
 
         PhoneController.GetInstance().PlayNotificationSound();
 
@@ -80,8 +78,8 @@ public class NotificationManager : MonoBehaviour
         notifRect.anchorMin = new Vector2(0, 1);
         notifRect.anchorMax = new Vector2(1, 1);
         notifRect.pivot = new Vector2(0f, 1f);
-        notifRect.anchoredPosition = Vector2.zero;
-        // TODO animate notification send
+        notifRect.anchoredPosition = Vector2.up * notificationSpacing;
+        StartCoroutine(AnimateNotificationScroll(notification, Vector2.down, scrollSpeed, notificationSpacing));
     }
 
     public void Dismiss(Notification notification)
@@ -96,13 +94,36 @@ public class NotificationManager : MonoBehaviour
     private void DismissNotificationUI(int index)
     {
         for (int i = 0; i < index; ++i)
+            StartCoroutine(AnimateNotificationScroll(notifications[i], Vector2.up, scrollSpeed, notificationSpacing));
+
+        IEnumerator KillRoutine(Notification notification)
         {
-            RectTransform rt = notifications[i].GetComponent<RectTransform>();
-            rt.anchoredPosition += Vector2.up * notificationSpacing;
-            // TODO animate motion
+            yield return AnimateNotificationScroll(notification, Vector2.left, swipeSpeed, PhoneController.GetInstance().GetScreenWidth());
+            Destroy(notification.gameObject);
+            yield return null;
         }
 
-        Destroy(notifications[index].gameObject); // TODO animate dismissal
+        StartCoroutine(KillRoutine(notifications[index]));
+    }
+
+    private IEnumerator AnimateNotificationScroll(Notification notification, Vector2 direction, float speed, float spacing)
+    {
+        float distance = 0f;
+        while (distance < spacing)
+        {
+            float deltaDistance = speed * Time.deltaTime;
+            if (distance + deltaDistance < spacing)
+                distance += deltaDistance;
+            else
+            {
+                deltaDistance = spacing - distance;
+                distance = spacing;
+            }
+
+            notification.GetComponent<RectTransform>().anchoredPosition += direction * deltaDistance;
+
+            yield return null;
+        }
     }
 
     public static NotificationManager GetInstance()
