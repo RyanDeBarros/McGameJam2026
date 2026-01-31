@@ -30,15 +30,15 @@ public class NotificationManager : MonoBehaviour
 
     private IEnumerator StartNotifs()
     {
-        NotifyBabyStart(6);
+        //NotifyBabyStart(6);
         yield return new WaitForSeconds(1f);
         NotifyMomDistance(30);
         yield return new WaitForSeconds(1f);
-        NotifyBabyCollection(5);
+        //NotifyBabyCollection(5);
         yield return new WaitForSeconds(1f);
         NotifyBabyNearby();
         yield return new WaitForSeconds(1f);
-        NotifyBabyCollection(4);
+        //NotifyBabyCollection(4);
     }
 
     public void Notify(string message)
