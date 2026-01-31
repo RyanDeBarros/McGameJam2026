@@ -451,8 +451,8 @@ MonoBehaviour:
   refreshEvery: 1
   clampToEdge: 1
   scaleDotWithPanel: 0
-  enemyDotSize: {x: 6, y: 6}
-  playerDotSize: {x: 8, y: 8}
+  enemyDotSize: {x: 10, y: 10}
+  playerDotSize: {x: 14, y: 14}
 --- !u!1 &6752450641339826470
 GameObject:
   m_ObjectHideFlags: 0

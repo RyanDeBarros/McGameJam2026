@@ -109,13 +109,13 @@ public class MinimapManager : MonoBehaviour
             var t = kv.Key;
             var dot = kv.Value;
             if (t == null) { if (dot) dot.gameObject.SetActive(false); continue; }
-            PositionDot(dot, t.position);
         }
 
         // Player
         if (playerTf && playerDot)
         {
             PositionDot(playerDot, playerTf.position);
+            RotateDot(playerDot, playerTf.forward);
         }
     }
 
@@ -164,6 +164,15 @@ public class MinimapManager : MonoBehaviour
             float s = Mathf.Clamp(minimapRect.rect.width, 64f, 1024f) / 32f;
             dot.sizeDelta = new Vector2(s, s);
         }
+
+        // TODO rotation
+    }
+
+    void RotateDot(RectTransform dot, Vector3 forward)
+    {
+        Vector3 flatForward = new Vector3(forward.x, 0f, forward.z).normalized;
+        float angle = Mathf.Atan2(flatForward.x, flatForward.z) * Mathf.Rad2Deg;
+        dot.rotation = Quaternion.Euler(0f, 0f, -angle);
     }
 
     // Public hook if your spawners/despawners want to force an immediate refresh
