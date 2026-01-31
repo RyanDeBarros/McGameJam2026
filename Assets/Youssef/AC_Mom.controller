@@ -130,7 +130,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: isPlayerSeen
+    m_ConditionEvent: JumpScareTrigger
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2660941254322445389}
@@ -281,7 +281,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: New Bool
+  - m_Name: JumpScareTrigger
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
