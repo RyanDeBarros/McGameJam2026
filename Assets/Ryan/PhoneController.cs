@@ -10,6 +10,9 @@ public class PhoneController : MonoBehaviour
     private bool open = false;
     private float openedFactor = 0f;
 
+    [SerializeField] private float openedPhoneLinearDamping = 25f;
+    private Transform player;
+
     [Header("Phone Animation")]
     [SerializeField] private RectTransform visual;
     [SerializeField] private RectTransform openedVisual;
@@ -32,6 +35,8 @@ public class PhoneController : MonoBehaviour
 
     private void Awake()
     {
+        player = GameObject.FindWithTag("Player").transform;
+
         Assert.IsNotNull(visual);
         Assert.IsNotNull(openedVisual);
         Assert.IsNotNull(closedVisual);
@@ -104,6 +109,8 @@ public class PhoneController : MonoBehaviour
 
         distractionDelayIndex = 0;
         distractionDelayLeft = openedDistractionDelays[distractionDelayIndex];
+
+        player.GetComponent<Rigidbody>().linearDamping = openedPhoneLinearDamping;
     }
 
     private IEnumerator OpenPhoneAnimation()
@@ -130,6 +137,8 @@ public class PhoneController : MonoBehaviour
         visualAnimation = StartCoroutine(ClosePhoneAnimation());
 
         distractionDelayLeft = Random.Range(closedDistractionDelayMin, closedDistractionDelayMax);
+
+        player.GetComponent<Rigidbody>().linearDamping = 0f;
     }
 
     private IEnumerator ClosePhoneAnimation()
@@ -163,11 +172,6 @@ public class PhoneController : MonoBehaviour
     public Transform GetNotificationRoot()
     {
         return notificationRoot;
-    }
-
-    public bool IsOpen() // TODO slow player speed when phone is open
-    {
-        return open;
     }
 
     public float GetScreenWidth()

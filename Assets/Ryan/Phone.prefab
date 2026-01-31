@@ -293,6 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5331146521577e6419db445a1665bfc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PhoneController
+  openedPhoneLinearDamping: 25
   visual: {fileID: 4677171036063323080}
   openedVisual: {fileID: 784738815497113445}
   closedVisual: {fileID: 2253296662546847196}
