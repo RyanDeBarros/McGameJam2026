@@ -25,10 +25,10 @@ public class NotificationManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(StartNotifs());
+        //StartCoroutine(StartNotifs());
     }
 
-    private IEnumerator StartNotifs()
+    /*private IEnumerator StartNotifs()
     {
         //NotifyBabyStart(6);
         yield return new WaitForSeconds(1f);
@@ -39,7 +39,7 @@ public class NotificationManager : MonoBehaviour
         NotifyBabyNearby();
         yield return new WaitForSeconds(1f);
         //NotifyBabyCollection(4);
-    }
+    }*/
 
     public void Notify(string message)
     {
