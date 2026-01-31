@@ -22,8 +22,8 @@ public class SpawnerManager : MonoBehaviour
         SpawnersDetected  = new List<GameObject>( GameObject.FindGameObjectsWithTag(Tag));
         //Debug.Log("Found " + SpawnersDetected.Length);
 
-        //Random value between 0 and the number of Spawners found 
-        Amount = Random.Range(0, SpawnersDetected.Count);
+        //Random value between 3 and the number of Spawners found 
+        Amount = Random.Range(3, SpawnersDetected.Count);
 
         Amount = Mathf.Min(Amount, SpawnersDetected.Count);
 

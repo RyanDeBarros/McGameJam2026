@@ -1,16 +1,15 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /*Attach this to the player
   Rigidbody and collider are needed (message just in case)
 */
 public class CollectorManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public int BabyCount;
     private int BabySpawned;
-    //private bool IsCounted;
-
+  
     void Start()
     {
         BabyCount = 0;
@@ -35,7 +34,7 @@ public class CollectorManager : MonoBehaviour
         if (BabyCount == BabySpawned)
         {
             NotificationManager.NotifyBabyCompletion();
-
+            SceneManager.LoadScene("EndScene");
         }
         
 
