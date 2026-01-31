@@ -15,7 +15,13 @@ void OnApplicationQuit()
 
 void RunExe()
 {
-    // Process.Start(@"C:\Path\To\Program.exe");
+
+    string exePath = System.IO.Path.Combine(
+    Application.dataPath,
+    "../Assets/Nia/Popup 4th Wall/popup.exe");
+
+Process.Start(exePath);
+
 }
 }
 
