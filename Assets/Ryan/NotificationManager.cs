@@ -9,7 +9,7 @@ public class NotificationManager : MonoBehaviour
     [Header("Notification UI")]
     [SerializeField] private GameObject notificationPrefab;
     [SerializeField] float notificationSpacing = 50f;
-    [SerializeField] private int maxNotifications = 4;
+    [SerializeField] private int maxNotifications = 5;
     [SerializeField] private float scrollSpeed = 500f;
     [SerializeField] private float swipeSpeed = 1000f;
 
@@ -17,7 +17,6 @@ public class NotificationManager : MonoBehaviour
     [SerializeField] private List<string> distractionMessages = new();
 
     private readonly List<Notification> notifications = new();
-    private readonly List<Notification> waitingQueue = new();
 
     private void Awake()
     {
@@ -37,11 +36,7 @@ public class NotificationManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         NotifyBabyCollection(5);
         yield return new WaitForSeconds(1f);
-        NotifyDistraction();
-        yield return new WaitForSeconds(1f);
         NotifyBabyNearby();
-        yield return new WaitForSeconds(1f);
-        NotifyDistraction();
         yield return new WaitForSeconds(1f);
         NotifyBabyCollection(4);
     }
@@ -51,23 +46,17 @@ public class NotificationManager : MonoBehaviour
         var go = Instantiate(notificationPrefab);
         Notification notification = go.GetComponent<Notification>();
         notification.SetMessage(message);
-        notification.DisableVisual();
-        waitingQueue.Add(notification);
-        OnNotificationCountChanged();
+        if (notifications.Count == maxNotifications)
+            DismissOldestNotification();
+        SendNotificationUI(notification);
+        notifications.Add(notification);
     }
 
-    private void OnNotificationCountChanged()
+    private void DismissOldestNotification()
     {
-        while (notifications.Count < maxNotifications && waitingQueue.Count > 0)
-        {
-            Notification notification = waitingQueue.First();
-            waitingQueue.RemoveAt(0);
-
-            SendNotificationUI(notification);
-            notifications.Add(notification);
-            notification.EnableVisual();
-            notification.StartTimer();
-        }
+        Notification n = notifications.OrderByDescending(n => n.GetAge()).First();
+        n.CancelTimer();
+        Dismiss(n);
     }
 
     private void SendNotificationUI(Notification notification)
@@ -91,8 +80,6 @@ public class NotificationManager : MonoBehaviour
         int index = notifications.IndexOf(notification);
         DismissNotificationUI(index);
         notifications.RemoveAt(index);
-
-        OnNotificationCountChanged();
     }
 
     private void DismissNotificationUI(int index)

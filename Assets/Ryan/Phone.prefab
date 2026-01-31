@@ -300,6 +300,14 @@ MonoBehaviour:
   blackScreen: {fileID: 6222919954320194036}
   notificationRoot: {fileID: 335052866457826328}
   notificationSound: {fileID: 2462411960036118485}
+  openedDistractionDelays:
+  - 5
+  - 4
+  - 3
+  - 2
+  - 1
+  closedDistractionDelayMin: 10
+  closedDistractionDelayMax: 50
 --- !u!114 &9007248105921565633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,7 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NotificationManager
   notificationPrefab: {fileID: 6047366806567804840, guid: 3776df8497b3ac74abe6bcd2ca2a258d, type: 3}
   notificationSpacing: 44
-  maxNotifications: 4
+  maxNotifications: 5
   scrollSpeed: 500
   swipeSpeed: 1000
   distractionMessages:

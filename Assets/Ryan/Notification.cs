@@ -6,17 +6,34 @@ using UnityEngine.Assertions;
 public class Notification : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI message;
-    [SerializeField] private float lifetime = 5f;
+    [SerializeField] private float lifetimeMin = 2.5f;
+    [SerializeField] private float lifetimeMax = 3.5f;
+    private float lifetime;
+    private float age = 0f;
 
     private Coroutine lifeRoutine;
-    private CanvasGroup canvasGroup;
 
     private void Awake()
     {
         Assert.IsNotNull(message);
 
-        canvasGroup = GetComponent<CanvasGroup>();
-        Assert.IsNotNull(canvasGroup);
+        lifetime = Random.Range(lifetimeMin, lifetimeMax);
+    }
+
+    public void Start()
+    {
+        IEnumerator LifeRoutine()
+        {
+            yield return new WaitForSeconds(lifetime);
+            NotificationManager.GetInstance().Dismiss(this);
+        }
+
+        lifeRoutine = StartCoroutine(LifeRoutine());
+    }
+
+    private void Update()
+    {
+        age += Time.deltaTime;
     }
 
     public void SetMessage(string m)
@@ -24,24 +41,13 @@ public class Notification : MonoBehaviour
         message.text = m;
     }
 
-    public void DisableVisual()
+    public void CancelTimer()
     {
-        canvasGroup.alpha = 0f;
+        StopCoroutine(lifeRoutine);
     }
 
-    public void EnableVisual()
+    public float GetAge()
     {
-        canvasGroup.alpha = 1f;
-    }
-
-    public void StartTimer()
-    {
-        lifeRoutine ??= StartCoroutine(LifeRoutine());
-    }
-
-    private IEnumerator LifeRoutine()
-    {
-        yield return new WaitForSeconds(lifetime);
-        NotificationManager.GetInstance().Dismiss(this);
+        return age;
     }
 }

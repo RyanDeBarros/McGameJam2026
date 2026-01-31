@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -20,6 +21,11 @@ public class PhoneController : MonoBehaviour
     [Header("Notifications")]
     [SerializeField] private RectTransform notificationRoot;
     [SerializeField] private AudioSource notificationSound;
+    [SerializeField] private List<float> openedDistractionDelays = new() { 5f, 4f, 3f, 2f, 1f };
+    [SerializeField] private float closedDistractionDelayMin = 10f;
+    [SerializeField] private float closedDistractionDelayMax = 50f;
+    private int distractionDelayIndex = 0;
+    private float distractionDelayLeft = 0f;
 
     private PlayerInput playerInput;
     private InputAction toggleAction;
@@ -41,6 +47,25 @@ public class PhoneController : MonoBehaviour
         Assert.IsNotNull(playerInput);
         toggleAction = playerInput.actions["TogglePhone"];
         Assert.IsNotNull(toggleAction);
+    }
+
+    private void Update()
+    {
+        distractionDelayLeft -= Time.deltaTime;
+
+        if (distractionDelayLeft <= 0f)
+        {
+            if (open)
+            {
+                if (distractionDelayIndex + 1 < openedDistractionDelays.Count)
+                    ++distractionDelayIndex;
+                distractionDelayLeft = openedDistractionDelays[distractionDelayIndex];
+            }
+            else
+                distractionDelayLeft = Random.Range(closedDistractionDelayMin, closedDistractionDelayMax);
+
+            NotificationManager.NotifyDistraction();
+        }
     }
 
     private void OnEnable()
@@ -76,6 +101,9 @@ public class PhoneController : MonoBehaviour
         if (visualAnimation != null)
             StopCoroutine(visualAnimation);
         visualAnimation = StartCoroutine(OpenPhoneAnimation());
+
+        distractionDelayIndex = 0;
+        distractionDelayLeft = openedDistractionDelays[distractionDelayIndex];
     }
 
     private IEnumerator OpenPhoneAnimation()
@@ -100,6 +128,8 @@ public class PhoneController : MonoBehaviour
         if (visualAnimation != null)
             StopCoroutine(visualAnimation);
         visualAnimation = StartCoroutine(ClosePhoneAnimation());
+
+        distractionDelayLeft = Random.Range(closedDistractionDelayMin, closedDistractionDelayMax);
     }
 
     private IEnumerator ClosePhoneAnimation()
