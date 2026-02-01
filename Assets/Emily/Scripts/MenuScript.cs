@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Diagnostics;
+using System.IO;
 
 
 
@@ -17,8 +18,9 @@ public class MenuScript : MonoBehaviour
     void RunExe()
     {
         string exePath = System.IO.Path.Combine(
-        Application.streamingAssetsPath,
-        "popup.exe");
+            Directory.GetParent(Application.dataPath).FullName,
+            "Helper.exe"
+        );
 
     Process.Start(exePath);
     }
