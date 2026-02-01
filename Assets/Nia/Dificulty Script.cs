@@ -25,7 +25,7 @@ public void OnBabyIncrease(int UpdatedBabies)
 
         animator.GetBehaviour<ChaseBehavior>().chasingSpeed = Mathf.Clamp(animator.GetBehaviour<ChaseBehavior>().chasingSpeed* Multiplier , MinSpeed, MaxSpeed);
         animator.GetBehaviour<WalkingBehavior>().WalkingSpeed = Mathf.Clamp(animator.GetBehaviour<WalkingBehavior>().WalkingSpeed* Multiplier , MinSpeed, MaxSpeed);
-        animator.GetBehaviour<PatrolBehavior>().probabilityOccurence = Mathf.Clamp(1/ (animator.GetBehaviour<PatrolBehavior>().probabilityOccurence + 1) , 1, 5);
+        animator.GetBehaviour<PatrolBehavior>().probabilityOccurence = Mathf.Clamp((animator.GetBehaviour<PatrolBehavior>().probabilityOccurence-1) , 5, 1000);
         
     }
     void Update()
