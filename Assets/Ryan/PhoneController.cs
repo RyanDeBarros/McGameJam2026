@@ -7,8 +7,8 @@ using UnityEngine.InputSystem;
 
 public class PhoneController : MonoBehaviour
 {
-    private bool open = false;
-    private float openedFactor = 0f;
+    private bool open = true;
+    private float openedFactor = 1f;
 
     [SerializeField] private float openedPhoneLinearDamping = 25f;
     private Transform player;
@@ -20,6 +20,7 @@ public class PhoneController : MonoBehaviour
     [SerializeField] private float toggleAnimationSpeed = 5f;
     private Coroutine visualAnimation = null;
     [SerializeField] private RectTransform blackScreen;
+    [SerializeField] private Transform flashlight;
 
     [Header("Notifications")]
     [SerializeField] private RectTransform notificationRoot;
@@ -44,6 +45,8 @@ public class PhoneController : MonoBehaviour
 
         Assert.IsNotNull(blackScreen);
         blackScreen.gameObject.SetActive(true);
+
+        Assert.IsNotNull(flashlight);
 
         Assert.IsNotNull(notificationRoot);
         Assert.IsNotNull(notificationSound);
@@ -102,6 +105,7 @@ public class PhoneController : MonoBehaviour
         if (open)
             return;
         open = true;
+        flashlight.gameObject.SetActive(true);
 
         if (visualAnimation != null)
             StopCoroutine(visualAnimation);
@@ -131,6 +135,7 @@ public class PhoneController : MonoBehaviour
         if (!open)
             return;
         open = false;
+        flashlight.gameObject.SetActive(false);
 
         if (visualAnimation != null)
             StopCoroutine(visualAnimation);

@@ -529,7 +529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   hearingRange: 50
   minVolume: 0.1
-  probabilityOccurence: 1
+  probabilityOccurence: 100
   tresholdIndex: 4
   sightRadius: 50
   sightAngle: 140
