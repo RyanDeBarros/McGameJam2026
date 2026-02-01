@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6682985841697727324}
   - component: {fileID: 9018650242833035041}
   - component: {fileID: 4934794705501872947}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 9187634294460757187}
   - component: {fileID: 4828277598692252242}
   - component: {fileID: 8949891869811668437}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 8675489523433156461}
   - component: {fileID: 3690028030864302040}
   - component: {fileID: 5938377958322386477}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RawImage (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 2544980727560491984}
   - component: {fileID: 1251024986380991269}
   - component: {fileID: 7002524451146220229}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RawImage (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 3875984701916187115}
   - component: {fileID: 6297984864990875478}
   - component: {fileID: 3576034211767724197}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RawImage (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -375,7 +375,7 @@ GameObject:
   - component: {fileID: 2783232165974481640}
   - component: {fileID: 8981599361069468530}
   - component: {fileID: 5872673579459552772}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Radar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,7 +465,7 @@ GameObject:
   - component: {fileID: 8890831482371956140}
   - component: {fileID: 4793439600079034191}
   - component: {fileID: 8546821870338206327}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BKG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +538,7 @@ GameObject:
   - component: {fileID: 408210396016924081}
   - component: {fileID: 8738845637110227745}
   - component: {fileID: 3249635773408855755}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
