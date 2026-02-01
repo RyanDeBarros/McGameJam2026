@@ -76,7 +76,7 @@ public class RadarController : MonoBehaviour
                     NotificationManager.NotifyBabyNearby();
                     source.clip = babyCryingSFX;
                     source.loop = true;
-                    source.spatialBlend = 0.8f;
+                    source.spatialBlend = 0.5f;
                     source.Play();
                 }
             }
