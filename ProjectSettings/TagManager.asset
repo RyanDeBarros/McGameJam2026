@@ -9,6 +9,7 @@ TagManager:
   - TheActualSpray
   - Baby
   - Spawner
+  - navPoint
   - Mom
   layers:
   - Default
@@ -19,7 +20,7 @@ TagManager:
   - UI
   - ObstructionLayer
   - TargetLayer
-  - 
+  - RenderedModel
   - 
   - 
   - 
