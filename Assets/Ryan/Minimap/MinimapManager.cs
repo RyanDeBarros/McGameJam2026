@@ -73,6 +73,7 @@ public class MinimapManager : MonoBehaviour
                 dot.gameObject.SetActive(true);
                 if (!scaleDotWithPanel) dot.sizeDelta = enemyDotSize;
                 enemyDots.Add(t, dot);
+                dot.transform.localPosition = new(0f, 0f, -0.5f);
             }
         }
 
@@ -110,6 +111,7 @@ public class MinimapManager : MonoBehaviour
             var t = kv.Key;
             var dot = kv.Value;
             if (t == null) { if (dot) dot.gameObject.SetActive(false); continue; }
+            PositionDot(dot, t.position);
         }
 
         // Player
