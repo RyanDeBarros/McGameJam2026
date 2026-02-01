@@ -7,6 +7,9 @@ TagManager:
   - LSD
   - Spray
   - TheActualSpray
+  - Baby
+  - Spawner
+  - Mom
   layers:
   - Default
   - TransparentFX
@@ -14,8 +17,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - ObstructionLayer
+  - TargetLayer
   - 
   - 
   - 
