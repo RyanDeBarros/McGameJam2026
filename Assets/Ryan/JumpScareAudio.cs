@@ -3,18 +3,15 @@ using UnityEngine.Assertions;
 
 public class JumpScareAudio : MonoBehaviour
 {
-    [SerializeField] private AudioSource kissingAudio;
-    [SerializeField] private AudioSource eatingAudio;
+    [SerializeField] private new AudioSource audio;
 
     private void Awake()
     {
-        Assert.IsNotNull(kissingAudio);
-        Assert.IsNotNull(eatingAudio);
+        Assert.IsNotNull(audio);
     }
 
     public void PlayAudio()
     {
-        kissingAudio.Play();
-        eatingAudio.Play();
+        audio.Play();
     }
 }
