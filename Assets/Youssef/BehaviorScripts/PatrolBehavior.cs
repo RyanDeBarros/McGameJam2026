@@ -11,7 +11,7 @@ public class PatrolBehavior : StateMachineBehaviour
 {
     public float hearingRange = 10.0f;
     public float minVolume = 0.1f;
-
+    public int probabilityOccurence = 1; // p = 1 / (n + 1) 
 
     public int tresholdIndex = 4;
     public float sightRadius = 5f;
@@ -19,7 +19,6 @@ public class PatrolBehavior : StateMachineBehaviour
     public float sightAngle = 100f;
     public LayerMask targetMask; //set layers in scene
     public LayerMask obstructionMask; //set layers in scene
-
 
     private List<GameObject> navPoints;
     private GameObject player;
@@ -35,23 +34,34 @@ public class PatrolBehavior : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        navPoints.Sort((nav1, nav2) => {
-            float dist1 = (player.transform.position - nav1.transform.position).sqrMagnitude;
-            float dist2 = (player.transform.position - nav2.transform.position).sqrMagnitude;
-            return dist1.CompareTo(dist2);
-        });
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-        {
-            agent.SetDestination(navPoints[UnityEngine.Random.Range(0, math.clamp(tresholdIndex, 0, navPoints.Count()))].transform.position);
-        }
+        patrol();
 
         if (isPlayerSeen())
         {
             animator.SetBool("isPlayerSeen", true);
         } else if (HeardSound()) {
-            animator.SetBool("isPlayerHeard", true);
+            animator.SetTrigger("HeardTrigger");
         }
         
+    }
+    private void patrol()
+    {
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            navPoints.Sort((nav1, nav2) =>
+            {
+                float dist1 = (player.transform.position - nav1.transform.position).sqrMagnitude;
+                float dist2 = (player.transform.position - nav2.transform.position).sqrMagnitude;
+                return dist1.CompareTo(dist2);
+            });
+            if (UnityEngine.Random.Range(0, probabilityOccurence) == UnityEngine.Random.Range(0, probabilityOccurence))
+            {
+                agent.transform.position = navPoints[UnityEngine.Random.Range(0, math.clamp(tresholdIndex, 0, navPoints.Count()))].transform.position;
+            }
+            else {
+                agent.SetDestination(navPoints[UnityEngine.Random.Range(0, math.clamp(tresholdIndex, 0, navPoints.Count()))].transform.position);
+            }
+        }
     }
     //This functions is used in three diff behavior scripts. for now keep it like that.
     private bool isPlayerSeen()
@@ -75,16 +85,16 @@ public class PatrolBehavior : StateMachineBehaviour
 
         return false;
     }
+
     public bool HeardSound()
     {
-        AudioSource[] sources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
-
-        foreach (AudioSource source in sources.Where(x => !this.GetComponentsInChildren<AudioSource>().Contains(x)))
+        foreach (ObstacleSound source in FindObjectsByType<ObstacleSound>(FindObjectsSortMode.None))
         {
-            if (!source.isPlaying) continue;
+            if (!source.GetAudioSource().isPlaying) continue;
 
             float distance = Vector3.Distance(agent.transform.position, source.transform.position);
-            float perceivedVolume = source.volume / Mathf.Max(distance, 1f);
+            float t = Mathf.InverseLerp(source.GetAudioSource().maxDistance, source.GetAudioSource().minDistance, distance);
+            float perceivedVolume = source.GetAudioSource().volume * Mathf.Clamp01(t);
 
             if (distance <= hearingRange && perceivedVolume >= minVolume)
             {

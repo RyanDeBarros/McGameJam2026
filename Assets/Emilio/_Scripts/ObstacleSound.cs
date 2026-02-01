@@ -8,6 +8,7 @@ public class ObstacleSound : MonoBehaviour
     {
         soundSource = GetComponent<AudioSource>();
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -17,4 +18,8 @@ public class ObstacleSound : MonoBehaviour
         }
     }
 
+    public AudioSource GetAudioSource()
+    {
+        return soundSource;
+    }
 }
