@@ -6,16 +6,16 @@ public class VoiceHUD : MonoBehaviour
     public GameObject mainPlayer;
     public float smoothSpeed = 10f;
 
-    [SerializeField] private Slider _healthBar;
+    [SerializeField] private Slider _VoiceBar;
     [SerializeField] private float maxLoudness = 0.1f;
     private void Awake()
     {
-        _healthBar = GetComponent<Slider>();
+        _VoiceBar = GetComponent<Slider>();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _healthBar.value = 0f;
+        _VoiceBar.value = 0f;
     }
     
     // Update is called once per frame
@@ -24,8 +24,12 @@ public class VoiceHUD : MonoBehaviour
         if (mainPlayer != null)
         {
             
-            _healthBar.value = Mathf.Clamp(mainPlayer.GetComponent<MicInputAction>().loudness / maxLoudness, 0f, 1f);
-            Debug.Log(_healthBar.value);
+            float targetValue = Mathf.Clamp(mainPlayer.GetComponent<MicInputAction>().loudness / maxLoudness, 0f, 1f);
+            _VoiceBar.value = Mathf.Lerp(
+           _VoiceBar.value,
+           targetValue,
+           Time.deltaTime * smoothSpeed
+       );
         }
 
     }
