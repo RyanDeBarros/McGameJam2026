@@ -981,7 +981,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: f1db9435d4326534e89563177e96969c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -992,7 +992,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1197,6 +1197,10 @@ PrefabInstance:
     - target: {fileID: 6654940951290440366, guid: 426fc20c1fd5f9043af8c7a78336b5b0, type: 3}
       propertyPath: m_Name
       value: Phone
+      objectReference: {fileID: 0}
+    - target: {fileID: 6654940951290440366, guid: 426fc20c1fd5f9043af8c7a78336b5b0, type: 3}
+      propertyPath: m_TagString
+      value: Branch
       objectReference: {fileID: 0}
     - target: {fileID: 7620103005618811848, guid: 426fc20c1fd5f9043af8c7a78336b5b0, type: 3}
       propertyPath: m_LocalPosition.x
