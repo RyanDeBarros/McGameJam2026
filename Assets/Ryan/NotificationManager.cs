@@ -22,7 +22,13 @@ public class NotificationManager : MonoBehaviour
     {
         Assert.IsNotNull(notificationPrefab);
     }
-
+    private void Start()
+    {
+        Notify("Space to toggle Phone");
+        Notify("E to pickup, Q to drop");
+        Notify("Left click to use item");
+        Notify("Press 1 to emote");
+    }
     public void Notify(string message)
     {
         var go = Instantiate(notificationPrefab);
