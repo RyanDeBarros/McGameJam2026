@@ -426,6 +426,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstPersonController
       objectReference: {fileID: 0}
+    - target: {fileID: 5581907474041838799, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236854264960532526, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
+      propertyPath: m_Color.b
+      value: 0.7012578
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236854264960532526, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9468163
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236854264960532526, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236854264960532526, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
+      propertyPath: m_Intensity
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236854264960532526, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
+      propertyPath: m_SpotAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236854264960532526, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -530,6 +558,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 784738815497113445, guid: 426fc20c1fd5f9043af8c7a78336b5b0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1798463495043690507, guid: 426fc20c1fd5f9043af8c7a78336b5b0, type: 3}
+      propertyPath: flashlight
+      value: 
+      objectReference: {fileID: 2142060750}
     - target: {fileID: 6654940951290440366, guid: 426fc20c1fd5f9043af8c7a78336b5b0, type: 3}
       propertyPath: m_Name
       value: Phone
@@ -610,6 +646,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1295289440}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &2142060750 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5581907474041838799, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
+  m_PrefabInstance: {fileID: 1244592366}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7939344953373634396
 PrefabInstance:
   m_ObjectHideFlags: 0
