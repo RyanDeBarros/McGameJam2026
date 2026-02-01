@@ -27,11 +27,17 @@ public class AmbienceManager : MonoBehaviour
     [SerializeField] private float switchTrackDurationMax = 60f;
     private float switchTrackDuration = 0f;
 
+    public static AudioClip micClip;
+    public static string micDevice;
+
     private void Awake()
     {
         instance = this;
         s1 = gameObject.AddComponent<AudioSource>();
         s2 = gameObject.AddComponent<AudioSource>();
+
+        micDevice = Microphone.devices[0];
+        micClip = Microphone.Start(micDevice,true,20,AudioSettings.outputSampleRate);
     }
 
     private void Start()
