@@ -5,6 +5,7 @@ public class ChaseBehavior : StateMachineBehaviour
 {
     public float jumpScareDistance = 10.0f;
     public float sightRadius = 5f;
+    public float chasingSpeed = 2f;
     [Range(0, 360)]
     public float sightAngle = 100f;
     public LayerMask targetMask; //set layers in scene
@@ -20,6 +21,7 @@ public class ChaseBehavior : StateMachineBehaviour
     {
         player = GameObject.FindGameObjectWithTag("MC");
         agent = animator.GetComponent<NavMeshAgent>();
+        agent.speed = chasingSpeed;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -27,14 +29,14 @@ public class ChaseBehavior : StateMachineBehaviour
     {
         lastPositionPlayer = player.transform.position;
         if (isPlayerSeen())
-        { 
-            agent.SetDestination(lastPositionPlayer);
+        {
+            agent.SetDestination(lastPositionPlayer); 
+            
             if (Vector3.Distance(agent.transform.position, lastPositionPlayer) <= jumpScareDistance) {
                 animator.SetBool("JumpScareTrigger", true);
             }
         }else {
             animator.SetBool("isPlayerSeen", false);
-            Debug.Log("Going back to Patrol");
         }
     }
     private bool isPlayerSeen()

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEditor.Rendering.Universal;
 using UnityEngine;
 using UnityEngine.AI;
@@ -39,7 +40,10 @@ public class PatrolBehavior : StateMachineBehaviour
             float dist2 = (player.transform.position - nav2.transform.position).sqrMagnitude;
             return dist1.CompareTo(dist2);
         });
-        agent.SetDestination(navPoints[UnityEngine.Random.Range(0,math.clamp(tresholdIndex, 0, navPoints.Count()))].transform.position);
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            agent.SetDestination(navPoints[UnityEngine.Random.Range(0, math.clamp(tresholdIndex, 0, navPoints.Count()))].transform.position);
+        }
 
         if (isPlayerSeen())
         {
@@ -75,7 +79,7 @@ public class PatrolBehavior : StateMachineBehaviour
     {
         AudioSource[] sources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
 
-        foreach (AudioSource source in sources)
+        foreach (AudioSource source in sources.Where(x => !this.GetComponentsInChildren<AudioSource>().Contains(x)))
         {
             if (!source.isPlaying) continue;
 

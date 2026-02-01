@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class WalkingBehavior : StateMachineBehaviour
 {
     public float stoppingDistance = 1.2f;
-
+    public float WalkingSpeed = 1.5f;
     public float sightRadius = 5f;
     [Range(0, 360)]
     public float sightAngle = 100f;
@@ -21,6 +21,7 @@ public class WalkingBehavior : StateMachineBehaviour
         player = GameObject.FindGameObjectWithTag("MC");
         agent = animator.GetComponent<NavMeshAgent>();
         lastPositionPlayer = player.transform.position;
+        agent.speed = WalkingSpeed;
         time = 0;
     }
 

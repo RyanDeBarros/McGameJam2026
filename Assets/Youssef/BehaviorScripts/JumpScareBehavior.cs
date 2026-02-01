@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem.XR.Haptics;
 using UnityEngine.SceneManagement;
 
 public class JumpScareBehavior : StateMachineBehaviour
 {
-    public float jumpScareDuration = 5f;
+    public float jumpScareDuration = 2f;
 
     private GameObject player;
     private NavMeshAgent agent;
@@ -15,7 +14,7 @@ public class JumpScareBehavior : StateMachineBehaviour
     {
         animator.SetBool("JumpScareTrigger", false);
         time = 0;
-        Camera cam = GameObject.FindGameObjectWithTag("Main Camera").GetComponent<Camera>();
+        Camera cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
         Transform camPoint = animator.transform.Find("JumpscareCameraPoint");
         cam.transform.position = camPoint.position;
@@ -25,9 +24,12 @@ public class JumpScareBehavior : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        time += Time.deltaTime;
-        if (jumpScareDuration>= time) {
+        time += Time.unscaledDeltaTime;
+        Time.timeScale = 0f;
+        if (time > jumpScareDuration)
+        {
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+            //disable input
         }
         
     }
