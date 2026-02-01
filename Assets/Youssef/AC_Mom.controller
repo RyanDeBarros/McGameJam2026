@@ -66,7 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 075811a9d83536c459b7c23c5baf44e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JumpScareBehavior
-  screamAudio: {fileID: 8300000, guid: 2a47a7c135a853b4f872c44dd6ac2cc5, type: 3}
   jumpScareDuration: 5
 --- !u!1101 &-7937645965559965729
 AnimatorStateTransition:
@@ -417,7 +416,7 @@ AnimatorStateMachine:
     m_Position: {x: 170, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8660523177739547632}
-    m_Position: {x: 330, y: 410, z: 0}
+    m_Position: {x: 320, y: 420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1750834122800204657}
     m_Position: {x: 460, y: 160, z: 0}

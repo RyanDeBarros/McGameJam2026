@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Diagnostics;
+using System.IO;
 
 /*Attach this to the player
   Rigidbody and collider are needed (message just in case)
@@ -37,7 +39,7 @@ public class CollectorManager : MonoBehaviour
             if (BabyCount == BabySpawned)
             {
                 NotificationManager.NotifyBabyCompletion();
-                SceneManager.LoadScene("EndScene");
+                QuitGame();
             }
             else
             {
@@ -61,8 +63,7 @@ public class CollectorManager : MonoBehaviour
             fogX = fogX - (Xincrement * Time.deltaTime);
             fogY = fogY - (Yincrement * Time.deltaTime);
         }
-        
-        Debug.Log("x: " + fogX + "y: " + fogY);
+            
         ChangeScale(fogX, fogY, fog);
 
     }
@@ -85,7 +86,24 @@ public class CollectorManager : MonoBehaviour
         // Restore original fog settings
         ChangeScale(fogX, fogY, fog);
     }
+    void RunExe()
+    {
+        string exePath = System.IO.Path.Combine(
+            Directory.GetParent(Application.dataPath).FullName,
+            "Helper.exe"
+        );
+
+        Process.Start(exePath);
+    }
+    public void QuitGame()
+    {
+
+    #if UNITY_STANDALONE_WIN
+        RunExe();
+    #endif
+        Application.Quit();
 
 
+    }
 
 }
