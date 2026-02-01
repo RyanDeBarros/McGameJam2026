@@ -91,7 +91,7 @@ public class CameraDetect : MonoBehaviour
     }
     public void FinishDrinking()
     {
-        speedTimer = 10;
+        speedTimer = 7;
         CameraEffectsController.distort = true;
         FirstPersonController.walkSpeed = 20;
         animator.SetBool("Holding", false);
