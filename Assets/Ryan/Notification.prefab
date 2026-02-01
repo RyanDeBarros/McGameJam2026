@@ -141,8 +141,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 15587edb03b8b0f4bac525645e9c23ed, type: 2}
+  m_sharedMaterial: {fileID: -7772706933633677927, guid: 15587edb03b8b0f4bac525645e9c23ed, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -369,6 +369,7 @@ MonoBehaviour:
   message: {fileID: 2669082565654741769}
   lifetimeMin: 2.5
   lifetimeMax: 3.5
+  lifetime: 0
 --- !u!225 &2762339301451766537
 CanvasGroup:
   m_ObjectHideFlags: 0

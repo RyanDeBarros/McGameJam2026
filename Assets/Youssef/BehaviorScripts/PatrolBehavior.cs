@@ -29,6 +29,7 @@ public class PatrolBehavior : StateMachineBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         agent = animator.GetComponent<NavMeshAgent>();
         navPoints = GameObject.FindGameObjectsWithTag("navPoint").ToList();
+        AmbienceManager.GetInstance().Play(AmbienceIntensity.Low);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

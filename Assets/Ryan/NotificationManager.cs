@@ -17,17 +17,20 @@ public class NotificationManager : MonoBehaviour
     [SerializeField] private List<string> distractionMessages = new();
 
     private readonly List<Notification> notifications = new();
+    private bool enableNonTutorial = true;
 
     private void Awake()
     {
         Assert.IsNotNull(notificationPrefab);
     }
 
-    public void Notify(string message)
+    public void Notify(string message, float lifetime = 0f)
     {
         var go = Instantiate(notificationPrefab);
         Notification notification = go.GetComponent<Notification>();
         notification.SetMessage(message);
+        if (lifetime > 0f)
+            notification.lifetime = lifetime;
         if (notifications.Count == maxNotifications)
             DismissOldestNotification();
         SendNotificationUI(notification);
@@ -106,32 +109,46 @@ public class NotificationManager : MonoBehaviour
 
     public static void NotifyMomDistance(float distanceMeters)
     {
-        GetInstance().Notify($"Mom {distanceMeters}m away!"); // TODO better message format
+        if (GetInstance().enableNonTutorial)
+            GetInstance().Notify($"Mom {distanceMeters}m away!");
     }
 
     public static void NotifyBabyStart(int numBabiesToCollect)
     {
-        GetInstance().Notify($"You have {numBabiesToCollect} bab{(numBabiesToCollect != 1 ? "ies" : "y")} to find."); // TODO better message format
+        GetInstance().Notify($"You have {numBabiesToCollect} bab{(numBabiesToCollect != 1 ? "ies" : "y")} to find.");
     }
 
     public static void NotifyBabyCollection(int babiesLeft)
     {
-        GetInstance().Notify($"You collected another baby. You have {babiesLeft} bab{(babiesLeft != 1 ? "ies" : "y")} left."); // TODO better message format
+        if (GetInstance().enableNonTutorial)
+            GetInstance().Notify($"You collected another baby. You have {babiesLeft} bab{(babiesLeft != 1 ? "ies" : "y")} left.");
     }
 
     public static void NotifyBabyCompletion()
     {
-        GetInstance().Notify($"You collected all babies. CONGRATULATIONS..."); // TODO better message format
+        if (GetInstance().enableNonTutorial)
+            GetInstance().Notify($"You collected all babies. CONGRATULATIONS...");
     }
 
     public static void NotifyBabyNearby()
     {
-        GetInstance().Notify("A baby is nearby!"); // TODO better message format
+        if (GetInstance().enableNonTutorial)
+            GetInstance().Notify("A baby is nearby!");
     }
 
     public static void NotifyDistraction()
     {
-        // TODO different icon?
-        GetInstance().Notify(GetInstance().distractionMessages.GetRandomElement());
+        if (GetInstance().enableNonTutorial)
+            GetInstance().Notify(GetInstance().distractionMessages.GetRandomElement());
+    }
+
+    public static void DisableNonTutorialNotifications()
+    {
+        GetInstance().enableNonTutorial = false;
+    }
+
+    public static void EnableNonTutorialNotifications()
+    {
+        GetInstance().enableNonTutorial = true;
     }
 }

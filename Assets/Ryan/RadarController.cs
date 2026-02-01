@@ -1,15 +1,18 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 public class RadarController : MonoBehaviour
 {
+    [SerializeField] private RectTransform mapFog;
+    [SerializeField] private MinimapManager miniMap;
+    [SerializeField] private GameObject babyAudioSourceRoot;
+    [SerializeField] private AudioClip babyCryingSFX;
     [SerializeField] private List<float> momDistanceThresholds = new() { 5f, 10f, 20f, 30f, 40f, 50f, 75f, 100f };
     private int currentThresholdIndex = -1;
     [SerializeField] private float babyDistanceThreshold = 20f;
-    private readonly HashSet<Transform> nearbyBabies = new();
-    [SerializeField] private RectTransform mapFog;
-    [SerializeField] private MinimapManager miniMap;
+    private readonly Dictionary<Transform, AudioSource> nearbyBabies = new();
 
     private Transform player;
     private Transform mom;
@@ -25,6 +28,8 @@ public class RadarController : MonoBehaviour
     {
         Assert.IsNotNull(mapFog);
         Assert.IsNotNull(miniMap);
+        Assert.IsNotNull(babyAudioSourceRoot);
+        Assert.IsNotNull(babyCryingSFX);
 
         player = GameObject.FindWithTag("Player").transform;
         mom = GameObject.FindWithTag("Mom").transform;
@@ -50,10 +55,7 @@ public class RadarController : MonoBehaviour
         {
             currentThresholdIndex = newThresholdIndex;
             if (currentThresholdIndex >= 0)
-            {
                 NotificationManager.NotifyMomDistance(momDistanceThresholds[currentThresholdIndex]);
-                // TODO play mom voice line
-            }
         }
 
         mapFog.anchoredPosition = miniMap.GetPlayerPosition();
@@ -61,25 +63,31 @@ public class RadarController : MonoBehaviour
 
     private void UpdateBabyRadar()
     {
-        nearbyBabies.RemoveWhere(baby => baby == null);
+        foreach (var baby in nearbyBabies.Keys.Where(baby => baby == null).ToList())
+            nearbyBabies.Remove(baby);
 
         foreach (var baby in GameObject.FindGameObjectsWithTag("Baby"))
         {
             if (Vector3.Distance(baby.transform.position, player.position) <= babyDistanceThreshold)
             {
-                if (!nearbyBabies.Contains(baby.transform))
+                if (!nearbyBabies.ContainsKey(baby.transform))
                 {
-                    nearbyBabies.Add(baby.transform);
+                    AudioSource source = babyAudioSourceRoot.AddComponent<AudioSource>();
+                    nearbyBabies[baby.transform] = source;
                     NotificationManager.NotifyBabyNearby();
-                    // TODO start playing baby voice lines continuously
+                    source.clip = babyCryingSFX;
+                    source.loop = true;
+                    source.spatialBlend = 0.8f;
+                    source.Play();
                 }
             }
             else
             {
-                if (nearbyBabies.Contains(baby.transform))
+                if (nearbyBabies.ContainsKey(baby.transform))
                 {
+                    AudioSource source = nearbyBabies[baby.transform];
+                    source.Stop();
                     nearbyBabies.Remove(baby.transform);
-                    // TODO stop playing baby voice lines
                 }
             }
         }

@@ -28,6 +28,9 @@ public class PhoneController : MonoBehaviour
     [SerializeField] private List<float> openedDistractionDelays = new() { 5f, 4f, 3f, 2f, 1f };
     [SerializeField] private float closedDistractionDelayMin = 10f;
     [SerializeField] private float closedDistractionDelayMax = 50f;
+    [SerializeField] private float tutorialLifetime = 5f;
+    [SerializeField] private float tutorialDelay = 0.5f;
+    [SerializeField] private float endTutorialDelay = 3f;
     private int distractionDelayIndex = 0;
     private float distractionDelayLeft = 0f;
 
@@ -55,6 +58,29 @@ public class PhoneController : MonoBehaviour
         Assert.IsNotNull(playerInput);
         toggleAction = playerInput.actions["TogglePhone"];
         Assert.IsNotNull(toggleAction);
+    }
+
+    private void Start()
+    {
+        distractionDelayLeft = openedDistractionDelays[distractionDelayIndex++];
+
+        IEnumerator Tutorial()
+        {
+            NotificationManager.DisableNonTutorialNotifications();
+            NotificationManager.GetInstance().Notify("Space to toggle Phone", tutorialLifetime);
+            yield return new WaitForSeconds(tutorialDelay);
+            NotificationManager.GetInstance().Notify("E to pickup, Q to drop", tutorialLifetime);
+            yield return new WaitForSeconds(tutorialDelay);
+            NotificationManager.GetInstance().Notify("Left click to use item", tutorialLifetime);
+            yield return new WaitForSeconds(tutorialDelay);
+            NotificationManager.GetInstance().Notify("Press 1 to emote", tutorialLifetime);
+            yield return new WaitForSeconds(endTutorialDelay);
+            NotificationManager.NotifyBabyStart(SpawnerManager.Amount);
+            yield return new WaitForSeconds(endTutorialDelay);
+            NotificationManager.EnableNonTutorialNotifications();
+        }
+
+        StartCoroutine(Tutorial());
     }
 
     private void Update()
