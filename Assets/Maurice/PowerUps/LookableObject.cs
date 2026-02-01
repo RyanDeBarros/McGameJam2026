@@ -34,28 +34,23 @@ public class LookableObject : MonoBehaviour, ILookable
 
     void Update()
     {
-        // --- Hover animation ---
         float hoverOffset = Mathf.Sin(Time.time * hoverFrequency) * hoverAmplitude;
         transform.position = basePosition + new Vector3(0, hoverOffset, 0);
 
-        // Optional slow rotation
         transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
 
-        // --- Smooth scale ---
         transform.localScale = Vector3.Lerp(
             transform.localScale,
             targetScale,
             Time.deltaTime * scaleSpeed
         );
 
-        // Pulse only when looking
         if (isLooking)
         {
             float pulse = Mathf.Sin(Time.time * 3f) * 0.01f;
             transform.localScale = targetScale * (1f + pulse);
         }
 
-        // --- Emission fade ---
         Color currentEmission = rend.material.GetColor("_EmissionColor");
         Color targetEmission = isLooking ? Color.yellow * glowIntensity : Color.black;
 

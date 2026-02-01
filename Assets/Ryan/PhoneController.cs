@@ -44,7 +44,7 @@ public class PhoneController : MonoBehaviour
         SetPhoneTransform();
 
         Assert.IsNotNull(blackScreen);
-        blackScreen.gameObject.SetActive(true);
+        blackScreen.gameObject.SetActive(false);
 
         Assert.IsNotNull(flashlight);
 
