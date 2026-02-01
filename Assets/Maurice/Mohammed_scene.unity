@@ -4909,6 +4909,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7053641703351930697, guid: 062d7e38cf8ab2f429ac36c3de7ed187, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1539977178}
     - targetCorrespondingSourceObject: {fileID: 4151301084462513265, guid: 062d7e38cf8ab2f429ac36c3de7ed187, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1135393297}
@@ -24288,6 +24291,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533859498}
   m_Mesh: {fileID: 4768362842119814386, guid: e2c5ee8e6dbb58c4baad016f2fa779bf, type: 3}
+--- !u!1 &1539977171 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7053641703351930697, guid: 062d7e38cf8ab2f429ac36c3de7ed187, type: 3}
+  m_PrefabInstance: {fileID: 354232276}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1539977178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539977171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6dad9b70f5f97b45a18077820884828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MicInputAction
+  loudnessThreshold: 0.03
+  momAi: {fileID: 1993836169}
+  momCooldown: 0.5
 --- !u!1 &1540914257
 GameObject:
   m_ObjectHideFlags: 0
