@@ -12,6 +12,7 @@ TagManager:
   - navPoint
   - Mom
   - Branch
+  - Arms
   layers:
   - Default
   - TransparentFX

@@ -42,7 +42,14 @@ public class AmbienceManager : MonoBehaviour
 
     private void Start()
     {
-        Play(intensity);
+        PlayRandomClip(intensity switch
+        {
+            AmbienceIntensity.Low => intense1AudioClips,
+            AmbienceIntensity.Medium => intense2AudioClips,
+            AmbienceIntensity.High => intense3AudioClips,
+            _ => throw new System.NotImplementedException()
+        });
+
         switchTrackDuration = Random.Range(switchTrackDurationMin, switchTrackDurationMax);
     }
 
