@@ -4584,6 +4584,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5856388732861134292, guid: 3b807f527976e844c9c96aa7c8ad8ff3, type: 3}
+      propertyPath: m_text
+      value: Single Mom in Your Area
+      objectReference: {fileID: 0}
+    - target: {fileID: 5856388732861134292, guid: 3b807f527976e844c9c96aa7c8ad8ff3, type: 3}
       propertyPath: m_fontSize
       value: 87.4
       objectReference: {fileID: 0}
