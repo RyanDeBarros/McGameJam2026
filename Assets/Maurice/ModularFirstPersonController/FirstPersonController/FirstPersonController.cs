@@ -39,7 +39,7 @@ public class FirstPersonController : MonoBehaviour
     private bool isZoomed = false;
 
     public bool playerCanMove = true;
-    public static float walkSpeed = 5f;
+    public static float walkSpeed = 10f;
     public float maxVelocityChange = 10f;
 
     // Internal Variables

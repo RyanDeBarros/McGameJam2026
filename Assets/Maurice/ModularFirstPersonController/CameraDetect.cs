@@ -27,7 +27,7 @@ public class CameraDetect : MonoBehaviour
         else
         {
             CameraEffectsController.distort = false;
-            FirstPersonController.walkSpeed = 5;
+            FirstPersonController.walkSpeed = 10;
         }    
 
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -38,8 +38,11 @@ public class CameraDetect : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, grabDistance))
         {
-            newLooked = hit.collider.GetComponent<ILookable>();
-            newLookedObject = hit.collider.gameObject;
+            if (hit.collider.gameObject.CompareTag("LSD") || hit.collider.gameObject.CompareTag("Spray"))
+            {
+                newLooked = hit.collider.GetComponent<ILookable>();
+                newLookedObject = hit.collider.gameObject;
+            }
         }
 
         if (newLooked != currentLooked)
@@ -90,7 +93,7 @@ public class CameraDetect : MonoBehaviour
     {
         speedTimer = 10;
         CameraEffectsController.distort = true;
-        FirstPersonController.walkSpeed = 10;
+        FirstPersonController.walkSpeed = 20;
         animator.SetBool("Holding", false);
         heldItem.SetActive(false);
         Holding = null;
@@ -117,7 +120,7 @@ public class CameraDetect : MonoBehaviour
         if (prefabToSpawn != null)
         {
             Vector3 spawnPosition = transform.position + transform.forward * 1.5f;
-            spawnPosition.y = 19.75f; // slight lift
+            spawnPosition.y = 21f; // slight lift
 
             Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
         }
