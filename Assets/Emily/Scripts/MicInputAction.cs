@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 /**
 attach this to player. adjust loudness threshold to desired minimum amount
 **/
 public class MicInputAction : MonoBehaviour
 {
+    public float loudness = 0f;
     private const int sampleWindow = 128;
     [SerializeField] private float loudnessThreshold = 0.05f;
 
@@ -13,8 +15,7 @@ public class MicInputAction : MonoBehaviour
 
     void Update()
     {
-        float loudness = GetMicLoudness();
-
+        loudness = GetMicLoudness();
         if (loudness > loudnessThreshold && Time.time > lastSpawn)
         {
             BringMomToPosition();

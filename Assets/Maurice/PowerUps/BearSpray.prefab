@@ -107,6 +107,9 @@ MonoBehaviour:
   growAmount: 1.1
   scaleSpeed: 8
   glowIntensity: 1
+  hoverAmplitude: 0.05
+  hoverFrequency: 2
+  rotationSpeed: 20
 --- !u!65 &2640556928029490651
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -231,7 +234,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: d5b23a2a0802c4e41945540ae2e386eb, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -272,7 +275,7 @@ TextMesh:
   m_FontSize: 0
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 0}
+  m_Font: {fileID: 12800000, guid: d5b23a2a0802c4e41945540ae2e386eb, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295

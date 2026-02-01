@@ -81,6 +81,8 @@ public class PhoneController : MonoBehaviour
         }
 
         StartCoroutine(Tutorial());
+
+        player.GetComponent<Rigidbody>().linearDamping = openedPhoneLinearDamping;
     }
 
     private void Update()

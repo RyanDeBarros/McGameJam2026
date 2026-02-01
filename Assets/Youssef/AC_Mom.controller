@@ -66,7 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 075811a9d83536c459b7c23c5baf44e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JumpScareBehavior
-  screamAudio: {fileID: 8300000, guid: f1db9435d4326534e89563177e96969c, type: 3}
   jumpScareDuration: 5
 --- !u!1101 &-7937645965559965729
 AnimatorStateTransition:
@@ -267,7 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   jumpScareDistance: 5
   sightRadius: 1000
-  chasingSpeed: 4
+  chasingSpeed: 12
   sightAngle: 300
   targetMask:
     serializedVersion: 2
@@ -347,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   screamAudio: {fileID: 0}
   stoppingDistance: 1.2
-  WalkingSpeed: 1.5
+  WalkingSpeed: 3
   sightRadius: 5
   sightAngle: 120
   targetMask:
@@ -417,7 +416,7 @@ AnimatorStateMachine:
     m_Position: {x: 170, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8660523177739547632}
-    m_Position: {x: 330, y: 410, z: 0}
+    m_Position: {x: 320, y: 420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1750834122800204657}
     m_Position: {x: 460, y: 160, z: 0}
@@ -429,7 +428,7 @@ AnimatorStateMachine:
     m_Position: {x: 460, y: 80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4727536719668599080}
-    m_Position: {x: 320, y: 360, z: 0}
+    m_Position: {x: 330, y: 360, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -7937645965559965729}
