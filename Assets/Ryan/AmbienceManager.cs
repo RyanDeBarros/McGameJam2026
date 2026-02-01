@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AmbienceIntensity
+{
+    Low = 1,
+    Medium = 2,
+    High = 3
+}
+
 public class AmbienceManager : MonoBehaviour
 {
     private static AmbienceManager instance;
@@ -13,7 +20,7 @@ public class AmbienceManager : MonoBehaviour
     [SerializeField] private List<AudioClip> intense1AudioClips;
     [SerializeField] private List<AudioClip> intense2AudioClips;
     [SerializeField] private List<AudioClip> intense3AudioClips;
-    private int intensity = 1;
+    private AmbienceIntensity intensity = AmbienceIntensity.Low;
 
     [SerializeField] private float fadeDuration = 1f;
     [SerializeField] private float switchTrackDurationMin = 20f;
@@ -29,7 +36,7 @@ public class AmbienceManager : MonoBehaviour
 
     private void Start()
     {
-        Play(1);
+        Play(intensity);
         switchTrackDuration = Random.Range(switchTrackDurationMin, switchTrackDurationMax);
     }
 
@@ -44,13 +51,13 @@ public class AmbienceManager : MonoBehaviour
         }
     }
 
-    public void Play(int intensity)
+    public void Play(AmbienceIntensity intensity)
     {
         PlayRandomClip(intensity switch
         {
-            1 => intense1AudioClips,
-            2 => intense2AudioClips,
-            3 => intense3AudioClips,
+            AmbienceIntensity.Low => intense1AudioClips,
+            AmbienceIntensity.Medium => intense2AudioClips,
+            AmbienceIntensity.High => intense3AudioClips,
             _ => throw new System.NotImplementedException()
         });
         this.intensity = intensity;
