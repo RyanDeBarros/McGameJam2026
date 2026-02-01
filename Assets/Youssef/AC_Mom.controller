@@ -266,7 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   jumpScareDistance: 5
   sightRadius: 1000
-  chasingSpeed: 4
+  chasingSpeed: 12
   sightAngle: 300
   targetMask:
     serializedVersion: 2
@@ -346,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   screamAudio: {fileID: 0}
   stoppingDistance: 1.2
-  WalkingSpeed: 1.5
+  WalkingSpeed: 3
   sightRadius: 5
   sightAngle: 120
   targetMask:
@@ -530,8 +530,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   hearingRange: 50
   minVolume: 0.1
-  probabilityOccurence: 15
-  tresholdIndex: 4
+  probabilityOccurence: 100
+  thresholdOffsetIndex: 0
+  tresholdIndex: 10
   sightRadius: 50
   sightAngle: 140
   targetMask:

@@ -13,6 +13,7 @@ public class PatrolBehavior : StateMachineBehaviour
     public float minVolume = 0.1f;
     public int probabilityOccurence = 1; // p = 1 / (n + 1) 
 
+    public int thresholdOffsetIndex = 0;
     public int tresholdIndex = 4;
     public float sightRadius = 5f;
     [Range(0, 360)]
@@ -57,10 +58,10 @@ public class PatrolBehavior : StateMachineBehaviour
             });
             if (UnityEngine.Random.Range(0, probabilityOccurence) == UnityEngine.Random.Range(0, probabilityOccurence))
             {
-                agent.transform.position = navPoints[UnityEngine.Random.Range(0, math.clamp(tresholdIndex, 0, navPoints.Count()))].transform.position;
+                agent.transform.position = navPoints[UnityEngine.Random.Range(math.clamp(thresholdOffsetIndex, 0, navPoints.Count()), math.clamp(tresholdIndex, 0, navPoints.Count()))].transform.position;
             }
             else {
-                agent.SetDestination(navPoints[UnityEngine.Random.Range(0, math.clamp(tresholdIndex, 0, navPoints.Count()))].transform.position);
+                agent.SetDestination(navPoints[UnityEngine.Random.Range(math.clamp(thresholdOffsetIndex, 0, navPoints.Count()), math.clamp(tresholdIndex, 0, navPoints.Count()))].transform.position);
             }
         }
     }

@@ -84,8 +84,9 @@ public class CameraDetect : MonoBehaviour
             currentLooked = null;
             currentLookedObject = null;
         }
-        if (Input.GetButtonDown("Fire1")){
-            if (Holding == null) return;
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if (Input.GetButtonDown("Fire1") && stateInfo.IsName("Holding")) { 
+            if (Holding == null) return; 
             if(Holding == "LSD")
             {
                 AudioSource.resource = AudioClips[0];
