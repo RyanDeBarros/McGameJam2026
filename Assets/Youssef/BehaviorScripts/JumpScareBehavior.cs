@@ -22,6 +22,8 @@ public class JumpScareBehavior : StateMachineBehaviour
         player.transform.rotation = camPoint.rotation;
         player.GetComponent<Rigidbody>().useGravity = false;
         animator.GetComponent<JumpScareAudio>().PlayAudio();
+        PhoneController.GetInstance().ClosePhone();
+        PhoneController.GetInstance().enabled = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -69,6 +71,7 @@ public class JumpScareBehavior : StateMachineBehaviour
         );
         player.GetComponent<Rigidbody>().useGravity = true;
         FirstPersonController.disable = false;
+        PhoneController.GetInstance().enabled = true;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
