@@ -9,7 +9,7 @@ public class CollectorManager : MonoBehaviour
 
     public int BabyCount;
     private int BabySpawned;
-  
+    public static int Babies;
     void Start()
     {
         BabyCount = 0;
@@ -29,6 +29,7 @@ public class CollectorManager : MonoBehaviour
             }
             else
             {
+                Babies = BabyCount;
                 NotificationManager.NotifyBabyCollection(BabySpawned - BabyCount);
             }
 
