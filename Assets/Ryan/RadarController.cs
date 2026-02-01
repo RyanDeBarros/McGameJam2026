@@ -12,7 +12,7 @@ public class RadarController : MonoBehaviour
     [SerializeField] private List<float> momDistanceThresholds = new() { 5f, 10f, 20f, 30f, 40f, 50f, 75f, 100f };
     private int currentThresholdIndex = -1;
     [SerializeField] private float babyDistanceThreshold = 20f;
-    private readonly Dictionary<Transform, AudioSource> nearbyBabies = new();
+    private readonly HashSet<Transform> nearbyBabies = new();
 
     private Transform player;
     private Transform mom;
@@ -63,17 +63,16 @@ public class RadarController : MonoBehaviour
 
     private void UpdateBabyRadar()
     {
-        foreach (var baby in nearbyBabies.Keys.Where(baby => baby == null).ToList())
-            nearbyBabies.Remove(baby);
+        nearbyBabies.RemoveWhere(baby => baby == null);
 
         foreach (var baby in GameObject.FindGameObjectsWithTag("Baby"))
         {
             if (Vector3.Distance(baby.transform.position, player.position) <= babyDistanceThreshold)
             {
-                if (!nearbyBabies.ContainsKey(baby.transform))
+                if (!nearbyBabies.Contains(baby.transform))
                 {
-                    AudioSource source = babyAudioSourceRoot.AddComponent<AudioSource>();
-                    nearbyBabies[baby.transform] = source;
+                    AudioSource source = baby.AddComponent<AudioSource>();
+                    nearbyBabies.Add(baby.transform);
                     NotificationManager.NotifyBabyNearby();
                     source.clip = babyCryingSFX;
                     source.loop = true;
@@ -83,10 +82,11 @@ public class RadarController : MonoBehaviour
             }
             else
             {
-                if (nearbyBabies.ContainsKey(baby.transform))
+                if (nearbyBabies.Contains(baby.transform))
                 {
-                    AudioSource source = nearbyBabies[baby.transform];
+                    AudioSource source = baby.GetComponent<AudioSource>();
                     source.Stop();
+                    Destroy(source);
                     nearbyBabies.Remove(baby.transform);
                 }
             }
