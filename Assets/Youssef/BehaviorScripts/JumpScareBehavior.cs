@@ -26,6 +26,7 @@ public class JumpScareBehavior : StateMachineBehaviour
         player.GetComponent<Rigidbody>().useGravity = false;
         agent.GetComponent<AudioSource>().clip = screamAudio;
         agent.GetComponent<AudioSource>().Play();
+        // TODO play mom scream
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

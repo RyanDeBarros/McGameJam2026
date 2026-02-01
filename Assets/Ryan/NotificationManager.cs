@@ -106,32 +106,31 @@ public class NotificationManager : MonoBehaviour
 
     public static void NotifyMomDistance(float distanceMeters)
     {
-        GetInstance().Notify($"Mom {distanceMeters}m away!"); // TODO better message format
+        GetInstance().Notify($"Mom {distanceMeters}m away!");
     }
 
     public static void NotifyBabyStart(int numBabiesToCollect)
     {
-        GetInstance().Notify($"You have {numBabiesToCollect} bab{(numBabiesToCollect != 1 ? "ies" : "y")} to find."); // TODO better message format
+        GetInstance().Notify($"You have {numBabiesToCollect} bab{(numBabiesToCollect != 1 ? "ies" : "y")} to find.");
     }
 
     public static void NotifyBabyCollection(int babiesLeft)
     {
-        GetInstance().Notify($"You collected another baby. You have {babiesLeft} bab{(babiesLeft != 1 ? "ies" : "y")} left."); // TODO better message format
+        GetInstance().Notify($"You collected another baby. You have {babiesLeft} bab{(babiesLeft != 1 ? "ies" : "y")} left.");
     }
 
     public static void NotifyBabyCompletion()
     {
-        GetInstance().Notify($"You collected all babies. CONGRATULATIONS..."); // TODO better message format
+        GetInstance().Notify($"You collected all babies. CONGRATULATIONS...");
     }
 
     public static void NotifyBabyNearby()
     {
-        GetInstance().Notify("A baby is nearby!"); // TODO better message format
+        GetInstance().Notify("A baby is nearby!");
     }
 
     public static void NotifyDistraction()
     {
-        // TODO different icon?
         GetInstance().Notify(GetInstance().distractionMessages.GetRandomElement());
     }
 }

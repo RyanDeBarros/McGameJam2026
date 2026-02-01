@@ -52,7 +52,7 @@ public class RadarController : MonoBehaviour
             if (currentThresholdIndex >= 0)
             {
                 NotificationManager.NotifyMomDistance(momDistanceThresholds[currentThresholdIndex]);
-                // TODO play mom voice line
+                // TODO repeatedly play mom voice lines when within certain distance of player.
             }
         }
 

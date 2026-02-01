@@ -62,9 +62,8 @@ public class AmbienceManager : MonoBehaviour
     public void Play(AmbienceIntensity intensity)
     {
         if (this.intensity == intensity)
-        {
             return;
-        }
+
         PlayRandomClip(intensity switch
         {
             AmbienceIntensity.Low => intense1AudioClips,
