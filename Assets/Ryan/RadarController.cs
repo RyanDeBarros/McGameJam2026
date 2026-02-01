@@ -27,9 +27,12 @@ public class RadarController : MonoBehaviour
         Assert.IsNotNull(miniMap);
 
         player = GameObject.FindWithTag("Player").transform;
-        Assert.IsNotNull(player);
         mom = GameObject.FindWithTag("Mom").transform;
-        Assert.IsNotNull(mom);
+    }
+
+    private void Start()
+    {
+        RadiusScale = 0.5f;
     }
 
     private void Update()

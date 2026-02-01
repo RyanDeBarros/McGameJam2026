@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &548844561772079218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 730979054014980420}
+  - component: {fileID: 5493497393231766728}
+  m_Layer: 0
+  m_Name: AmbienceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &730979054014980420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548844561772079218}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5493497393231766728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548844561772079218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b5fabe5473fbf344b1ee4af33d0f010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AmbienceManager
+  intense1AudioClips:
+  - {fileID: 8300000, guid: 07b304c9dde46974485c98f66d7a56e8, type: 3}
+  - {fileID: 8300000, guid: 9fc41bebffebffd4eadbdb71e95fc4bb, type: 3}
+  - {fileID: 8300000, guid: d53279e352edb21428a07c051cd3bdec, type: 3}
+  - {fileID: 8300000, guid: 5993b43fbf2d5424e9fe14196ef7753d, type: 3}
+  intense2AudioClips:
+  - {fileID: 8300000, guid: 10f076dff53760748bea26f5a797212c, type: 3}
+  - {fileID: 8300000, guid: 816565ff941a2c04e82e78f052a7e4cb, type: 3}
+  - {fileID: 8300000, guid: 3f22dd12500de544f9a96f752317560f, type: 3}
+  - {fileID: 8300000, guid: bdc4e5bedf975874a8af337207e31216, type: 3}
+  intense3AudioClips:
+  - {fileID: 8300000, guid: 7a2877e7151be0346ba5403d3d54a7da, type: 3}
+  - {fileID: 8300000, guid: 30226e40c0b82e84c9c2802351494a24, type: 3}
+  fadeDuration: 1
