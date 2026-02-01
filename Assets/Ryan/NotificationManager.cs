@@ -23,24 +23,6 @@ public class NotificationManager : MonoBehaviour
         Assert.IsNotNull(notificationPrefab);
     }
 
-    private void Start()
-    {
-        StartCoroutine(StartNotifs());
-    }
-
-    private IEnumerator StartNotifs()
-    {
-        NotifyBabyStart(6);
-        yield return new WaitForSeconds(1f);
-        NotifyMomDistance(30);
-        yield return new WaitForSeconds(1f);
-        NotifyBabyCollection(5);
-        yield return new WaitForSeconds(1f);
-        NotifyBabyNearby();
-        yield return new WaitForSeconds(1f);
-        NotifyBabyCollection(4);
-    }
-
     public void Notify(string message)
     {
         var go = Instantiate(notificationPrefab);
@@ -129,7 +111,7 @@ public class NotificationManager : MonoBehaviour
 
     public static void NotifyBabyStart(int numBabiesToCollect)
     {
-        GetInstance().Notify($"You have {numBabiesToCollect} bab{(numBabiesToCollect != 1 ? "ies" : "y")} to collect."); // TODO better message format
+        GetInstance().Notify($"You have {numBabiesToCollect} bab{(numBabiesToCollect != 1 ? "ies" : "y")} to find."); // TODO better message format
     }
 
     public static void NotifyBabyCollection(int babiesLeft)
@@ -137,9 +119,14 @@ public class NotificationManager : MonoBehaviour
         GetInstance().Notify($"You collected another baby. You have {babiesLeft} bab{(babiesLeft != 1 ? "ies" : "y")} left."); // TODO better message format
     }
 
+    public static void NotifyBabyCompletion()
+    {
+        GetInstance().Notify($"You collected all babies. CONGRATULATIONS..."); // TODO better message format
+    }
+
     public static void NotifyBabyNearby()
     {
-        GetInstance().Notify($"A baby is nearby!"); // TODO better message format
+        GetInstance().Notify("A baby is nearby!"); // TODO better message format
     }
 
     public static void NotifyDistraction()
