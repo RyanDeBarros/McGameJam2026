@@ -1,11 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor.Rendering.Universal;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering;
 
 public class PatrolBehavior : StateMachineBehaviour
 {

@@ -19,10 +19,17 @@ public class MenuScript : MonoBehaviour
     {
         string exePath = System.IO.Path.Combine(
             Directory.GetParent(Application.dataPath).FullName,
-            "Helper.exe"
+            "popup","popup.exe"
         );
 
-    Process.Start(exePath);
+        var startInfo = new ProcessStartInfo
+        {
+            FileName = exePath,
+            UseShellExecute = false,
+            WorkingDirectory = Path.GetDirectoryName(exePath)
+        };
+
+        Process.Start(startInfo);
     }
 
     public void PlayGame()

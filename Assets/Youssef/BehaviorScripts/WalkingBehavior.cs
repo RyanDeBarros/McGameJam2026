@@ -32,6 +32,10 @@ public class WalkingBehavior : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent.SetDestination(lastPositionPlayer);
+        if (agent.pathStatus == NavMeshPathStatus.PathInvalid)
+        {
+            animator.SetTrigger("WalkingFailTrigger");
+        }
         if (Vector3.Distance(lastPositionPlayer, agent.transform.position) <= stoppingDistance)
         {
             animator.SetBool("isInvestigating", true);

@@ -34,7 +34,11 @@ public class AmbienceManager : MonoBehaviour
     {
         instance = this;
         s1 = gameObject.AddComponent<AudioSource>();
+        s1.playOnAwake = false;
+        s1.loop = true;
         s2 = gameObject.AddComponent<AudioSource>();
+        s2.playOnAwake = false;
+        s2.loop = true;
 
         micDevice = Microphone.devices[0];
         micClip = Microphone.Start(micDevice,true,20,AudioSettings.outputSampleRate);

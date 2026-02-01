@@ -23,8 +23,6 @@ public class CameraDetect : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             DropItem();
-            AudioSource.clip = AudioClips[2];
-            AudioSource.Play();
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -125,7 +123,8 @@ public class CameraDetect : MonoBehaviour
     void DropItem()
     {
         if (Holding == null) return;
-
+        AudioSource.clip = AudioClips[2];
+        AudioSource.Play();
         GameObject prefabToSpawn = null;
 
         if (Holding == "LSD")
