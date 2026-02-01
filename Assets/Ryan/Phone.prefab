@@ -124,7 +124,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -3}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 35, y: -15.000061}
+  m_AnchoredPosition: {x: 35, y: -15}
   m_SizeDelta: {x: 200, y: 300}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &3192711765125822472
@@ -503,8 +503,22 @@ MonoBehaviour:
   scrollSpeed: 500
   swipeSpeed: 1000
   distractionMessages:
-  - SiNgLe MaReS iN yOuR aReA
-  - New iOS update
+  - A new iOS update is available
+  - It is 15 degrees today
+  - You have reached your 10 000 steps!
+  - We've been trying to reach you about your car's extended warranty
+  - There is a problem with your Awesomazon package.
+  - There has been a price increase in RAM!
+  - DogeCoin is at an all time high!
+  - 'Bible verse of the day: Her children arise and call her blessed'
+  - Wish Bartholomew a happy birthday!
+  - 'Onmivox : A new grade came out!'
+  - 'Unity Security Alert with Older Versions! '
+  - 'Crash of Crans: Your village is being raided! Prepare your troops. '
+  - 'Duoringo: It''s time for your daily Spanish lesson. Do it or die. '
+  - 'You have 0 likes on your new RinkedIn post! '
+  - 'Your oovoo javer has arrived. '
+  - 1 roll away from hitting Jackpot
 --- !u!82 &2462411960036118485
 AudioSource:
   m_ObjectHideFlags: 0
