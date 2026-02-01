@@ -8,7 +8,7 @@ public class Notification : MonoBehaviour
     [SerializeField] private TextMeshProUGUI message;
     [SerializeField] private float lifetimeMin = 2.5f;
     [SerializeField] private float lifetimeMax = 3.5f;
-    private float lifetime;
+    public float lifetime;
     private float age = 0f;
 
     private Coroutine lifeRoutine;

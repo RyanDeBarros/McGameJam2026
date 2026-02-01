@@ -25,7 +25,7 @@ public class WalkingBehavior : StateMachineBehaviour
         lastPositionPlayer = player.transform.position;
         agent.speed = WalkingSpeed;
         time = 0;
-        AmbienceManager.GetInstance().Play(AmbienceIntensity.Low);
+        AmbienceManager.GetInstance().Play(AmbienceIntensity.Medium);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

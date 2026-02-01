@@ -13,8 +13,8 @@ public class ChaseBehavior : StateMachineBehaviour
 
     private GameObject player;
     private NavMeshAgent agent;
+    private ChaseVoiceLineManager voiceLineManager;
     private Vector3 lastPositionPlayer;
-
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -22,6 +22,15 @@ public class ChaseBehavior : StateMachineBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         agent = animator.GetComponent<NavMeshAgent>();
         agent.speed = chasingSpeed;
+        voiceLineManager = animator.GetComponent<ChaseVoiceLineManager>();
+        AmbienceManager.GetInstance().Play(AmbienceIntensity.High);
+        voiceLineManager.StartChasing();
+    }
+
+    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        voiceLineManager.StopChasing();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

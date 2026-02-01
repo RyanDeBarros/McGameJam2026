@@ -25,6 +25,7 @@ public class InvestigateBehavior : StateMachineBehaviour
         agent = animator.GetComponent<NavMeshAgent>();
         lastPositionPlayer = player.transform.position;
         time = 0;
+        AmbienceManager.GetInstance().Play(AmbienceIntensity.Medium);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
