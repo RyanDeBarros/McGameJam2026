@@ -1,11 +1,27 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Diagnostics;
+
+
+
+
+
 
 
 public class MainMenu : MonoBehaviour
 {
     [Header("UI Panels")]
     public GameObject creditsPanel;
+
+    
+    void RunExe()
+    {
+        string exePath = System.IO.Path.Combine(
+        Application.dataPath,
+        "../Assets/Nia/Popup 4th Wall/popup.exe");
+
+    Process.Start(exePath);
+    }
 
     public void PlayGame()
     {
@@ -15,8 +31,8 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        UnityEngine.Debug.Log("quit");
         Application.Quit();
+        RunExe();
     }
 
 
@@ -32,3 +48,5 @@ public class MainMenu : MonoBehaviour
         creditsPanel.SetActive(false);
     }
 }
+
+
