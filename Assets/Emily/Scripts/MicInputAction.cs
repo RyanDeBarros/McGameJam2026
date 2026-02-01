@@ -43,7 +43,7 @@ public class MicInputAction : MonoBehaviour
 
     void BringMomToPosition()
     {
-        momAi.transform.position = transform.position;
+        momAi.GetComponent<Animator>().SetTrigger("HeardTrigger");
     }
 
 }
