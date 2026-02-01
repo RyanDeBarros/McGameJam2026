@@ -17,8 +17,8 @@ public class CollectorManager : MonoBehaviour
 
     private float fogX;
     private float fogY;
-    [SerializeField] private float Xincrement = 0.01f;
-    [SerializeField] private float Yincrement = 0.01f;
+    [SerializeField] private float Xincrement = 0.0005f;
+    [SerializeField] private float Yincrement = 0.0005f;
 
     void Start()
     {
@@ -43,8 +43,8 @@ public class CollectorManager : MonoBehaviour
             {
                 Babies = BabyCount;
                 NotificationManager.NotifyBabyCollection(BabySpawned - BabyCount);
-                fogX = fogX + 0.05f;
-                fogY = fogY + 0.05f;
+                fogX = 1f;
+                fogY = 1f;
             }
 
             //Debug.Log("Babies "+ BabyCount);
@@ -56,10 +56,10 @@ public class CollectorManager : MonoBehaviour
     {
         BabySpawned = SpawnerManager.Amount;
 
-        if(fogX >= 0.2 & fogY >= 0.2)
+        if(fogX >= 0.3 & fogY >= 0.3)
         {
-            fogX = fogX - (Xincrement * Time.deltaTime);
-            fogY = fogY - (Yincrement * Time.deltaTime);
+            fogX = fogX - (Xincrement * Time.deltaTime * BabyCount);
+            fogY = fogY - (Yincrement * Time.deltaTime * BabyCount);
         }
         
         Debug.Log("x: " + fogX + "y: " + fogY);
