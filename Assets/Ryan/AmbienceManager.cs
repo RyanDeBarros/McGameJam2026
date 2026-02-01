@@ -50,7 +50,9 @@ public class AmbienceManager : MonoBehaviour
             switchTrackDuration = Random.Range(switchTrackDurationMin, switchTrackDurationMax);
         }
     }
-
+    public static AudioClip microphoneToAudioClip() {
+        return Microphone.Start(Microphone.devices[0], true, 20, AudioSettings.outputSampleRate);
+    }
     public void Play(AmbienceIntensity intensity)
     {
         if (this.intensity == intensity)

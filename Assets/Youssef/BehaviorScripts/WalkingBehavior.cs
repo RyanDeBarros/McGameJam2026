@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Audio;
 
 public class WalkingBehavior : StateMachineBehaviour
 {
+    public AudioResource screamAudio;
     public float stoppingDistance = 1.2f;
     public float WalkingSpeed = 1.5f;
     public float sightRadius = 5f;
