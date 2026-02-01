@@ -7,26 +7,33 @@ using UnityEngine.AI;
 
 public class DifficultySpeedChanger : MonoBehaviour
 {
-public NavMeshAgent agent;
+public Animator animator;
 public int Babies = CollectorManager.Babies;
 
+[SerializeField] float Multiplier = 1.2f;
+[SerializeField] float MaxSpeed = 5.0f;
+[SerializeField] float MinSpeed = 3.0f;
 public int PrevBabyCount = 0;
 
 void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
-
+        animator = GetComponent<Animator>();
     }
 
 public void OnBabyIncrease(int UpdatedBabies)
     {
-        PrevBabyCount = UpdatedBabies;
-        agent.velocity *= 1.2f;
+        PrevBabyCount = UpdatedBabies; 
+
+        animator.GetBehaviour<ChaseBehavior>().chasingSpeed  *= Multiplier;
+        animator.GetBehaviour<WalkingBehavior>().WalkingSpeed *= Multiplier;
     }
     void Update()
     {
         if (Babies != PrevBabyCount) {
             OnBabyIncrease(Babies);
+
         }
+
+        float xPos = Mathf.Clamp(animator.GetBehaviour<ChaseBehavior>().chasingSpeed , MinSpeed, MaxSpeed);
     }
 }
