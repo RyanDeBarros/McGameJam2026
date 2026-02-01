@@ -5,15 +5,14 @@ using UnityEngine.Assertions;
 
 public class ChaseVoiceLineManager : MonoBehaviour
 {
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private List<AudioClip> chaseVoiceLines;
     [SerializeField] private float voiceLineRefresh = 10f;
 
-    private AudioSource audioSource;
     private Coroutine chaseVoiceLineRefresh;
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
         Assert.IsNotNull(audioSource);
     }
 
