@@ -15,10 +15,16 @@ public class CollectorManager : MonoBehaviour
     [SerializeField] private float clearFogDuration = 1.5f;
     [SerializeField] private RectTransform fog;
 
+    private float fogX;
+    private float fogY;
+    [SerializeField] private float Xincrement = 0.01f;
+    [SerializeField] private float Yincrement = 0.01f;
+
     void Start()
     {
         BabyCount = 0;
-        
+        fogX = fog.localScale.x;
+        fogY = fog.localScale.y;
     }
 
     private void OnTriggerEnter(Collider baby)
@@ -37,6 +43,8 @@ public class CollectorManager : MonoBehaviour
             {
                 Babies = BabyCount;
                 NotificationManager.NotifyBabyCollection(BabySpawned - BabyCount);
+                fogX = fogX + 0.05f;
+                fogY = fogY + 0.05f;
             }
 
             //Debug.Log("Babies "+ BabyCount);
@@ -47,14 +55,37 @@ public class CollectorManager : MonoBehaviour
     private void Update()
     {
         BabySpawned = SpawnerManager.Amount;
+
+        if(fogX >= 0.2 & fogY >= 0.2)
+        {
+            fogX = fogX - (Xincrement * Time.deltaTime);
+            fogY = fogY - (Yincrement * Time.deltaTime);
+        }
+        
+        Debug.Log("x: " + fogX + "y: " + fogY);
+        ChangeScale(fogX, fogY, fog);
+
     }
 
-    private void ChangeScale (int xval, int yval, RectTransform rectTransform)
+    private void ChangeScale (float xval, float yval, RectTransform rectTransform)
     {
         Vector3 scale = rectTransform.localScale;
         scale.x = xval; // Set X scale to 2x
         scale.y = yval; // Set Y scale to 0.5x
         rectTransform.localScale = scale;
     }
+
+    private IEnumerator ClearFogTemporarily(float duration)       
+    {
+        // Clear fog
+        ChangeScale(1, 1, fog);
+
+        yield return new WaitForSeconds(duration);
+
+        // Restore original fog settings
+        ChangeScale(fogX, fogY, fog);
+    }
+
+
 
 }
