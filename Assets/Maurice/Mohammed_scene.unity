@@ -184,6 +184,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2063068028159357280, guid: 91c2d1053070494418091e9f69766a61, type: 3}
+      propertyPath: m_Center.x
+      value: -0.0007
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063068028159357280, guid: 91c2d1053070494418091e9f69766a61, type: 3}
+      propertyPath: m_Extents.x
+      value: 0.0005
+      objectReference: {fileID: 0}
     - target: {fileID: 2124225716436469762, guid: 91c2d1053070494418091e9f69766a61, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.28
@@ -241,6 +249,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 27054839630182945, guid: 062d7e38cf8ab2f429ac36c3de7ed187, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 173871660105387901, guid: 062d7e38cf8ab2f429ac36c3de7ed187, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -1634,6 +1646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6dad9b70f5f97b45a18077820884828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MicInputAction
+  loudness: 0
   loudnessThreshold: 0.3
   momAi: {fileID: 1993836169}
   momCooldown: 0.5
