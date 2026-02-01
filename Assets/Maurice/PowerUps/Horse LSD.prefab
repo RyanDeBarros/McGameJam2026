@@ -287,7 +287,7 @@ MonoBehaviour:
   objectName: {fileID: 1727622261930207879}
   growAmount: 1.1
   scaleSpeed: 8
-  glowIntensity: 1
+  glowIntensity: 0.5
 --- !u!65 &8679859416384136523
 BoxCollider:
   m_ObjectHideFlags: 0
