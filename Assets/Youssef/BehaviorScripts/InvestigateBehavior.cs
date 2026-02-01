@@ -21,7 +21,7 @@ public class InvestigateBehavior : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-        player = GameObject.FindGameObjectWithTag("MC");
+        player = GameObject.FindGameObjectWithTag("Player");
         agent = animator.GetComponent<NavMeshAgent>();
         lastPositionPlayer = player.transform.position;
         time = 0;
