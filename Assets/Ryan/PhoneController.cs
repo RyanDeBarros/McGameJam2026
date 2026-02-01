@@ -7,8 +7,8 @@ using UnityEngine.InputSystem;
 
 public class PhoneController : MonoBehaviour
 {
-    private bool open = false;
-    private float openedFactor = 0f;
+    private bool open = true;
+    private float openedFactor = 1f;
 
     [SerializeField] private float openedPhoneLinearDamping = 25f;
     private Transform player;

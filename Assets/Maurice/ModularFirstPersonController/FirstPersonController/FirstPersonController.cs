@@ -4,11 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-#if UNITY_EDITOR
-    using UnityEditor;
-    using System.Net;
-#endif
-
 public class FirstPersonController : MonoBehaviour
 {
     public bool lsd_mode;
@@ -18,9 +13,11 @@ public class FirstPersonController : MonoBehaviour
     public Camera playerCamera;
 
     public float fov = 60f;
-    public bool invertCamera = false;
+    public bool mouseInvertCameraY = false;
+    public bool controllerInvertCameraY = true;
     public bool cameraCanMove = true;
     public float mouseSensitivity = 2f;
+    public float controllerSensitivity = 4f;
     public float maxLookAngle = 50f;
 
     // Crosshair
@@ -74,25 +71,39 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
-    float camRotation;
-
     private void Update()
     {
         if (disable) return;
+
         // Control camera movement
         if (cameraCanMove)
         {
-            yaw = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseSensitivity;
+            float horizontalInput = 0f;
+            float verticalInput = 0f;
+            float sensitivity = 0f;
+            bool invertCameraY;
 
-            if (!invertCamera)
+            if (IsControllerConnected())
             {
-                pitch -= mouseSensitivity * Input.GetAxis("Mouse Y");
+                horizontalInput = Input.GetAxis("Right Stick X");
+                verticalInput = Input.GetAxis("Right Stick Y");
+                sensitivity = controllerSensitivity;
+                invertCameraY = controllerInvertCameraY;
             }
             else
             {
-                // Inverted Y
-                pitch += mouseSensitivity * Input.GetAxis("Mouse Y");
+                horizontalInput = Input.GetAxis("Mouse X");
+                verticalInput = Input.GetAxis("Mouse Y");
+                sensitivity = mouseSensitivity;
+                invertCameraY = mouseInvertCameraY;
             }
+
+            yaw = transform.localEulerAngles.y + horizontalInput * sensitivity;
+
+            if (!invertCameraY)
+                pitch -= verticalInput * sensitivity;
+            else
+                pitch += verticalInput * sensitivity;
 
             // Clamp pitch between lookAngle
             pitch = Mathf.Clamp(pitch, -maxLookAngle, maxLookAngle);
@@ -121,17 +132,29 @@ public class FirstPersonController : MonoBehaviour
                 isWalking = false;
             }
 
-                targetVelocity = transform.TransformDirection(targetVelocity) * walkSpeed;
+            targetVelocity = transform.TransformDirection(targetVelocity) * walkSpeed;
 
-                // Apply a force that attempts to reach our target velocity
-                Vector3 velocity = rb.linearVelocity;
-                Vector3 velocityChange = (targetVelocity - velocity);
-                velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-                velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-                velocityChange.y = 0;
+            // Apply a force that attempts to reach our target velocity
+            Vector3 velocity = rb.linearVelocity;
+            Vector3 velocityChange = (targetVelocity - velocity);
+            velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+            velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+            velocityChange.y = 0;
 
-                rb.AddForce(velocityChange, ForceMode.VelocityChange);
-            }
+            rb.AddForce(velocityChange, ForceMode.VelocityChange);
+        }
+    }
+
+    private bool IsControllerConnected()
+    {
+        string[] joysticks = Input.GetJoystickNames();
+
+        foreach (string joystick in joysticks)
+        {
+            if (!string.IsNullOrEmpty(joystick))
+                return true;
         }
 
+        return false;
+    }
 }
