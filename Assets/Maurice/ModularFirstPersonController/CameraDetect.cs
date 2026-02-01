@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class CameraDetect : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class CameraDetect : MonoBehaviour
     public float grabDistance = 3f;
     public GameObject LSDprefab;
     public GameObject SprayPrefab;
-
+    public AudioClip[] AudioClips;
+    public AudioSource AudioSource;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -68,16 +70,14 @@ public class CameraDetect : MonoBehaviour
         // GRAB LOGIC
         if (Input.GetButtonDown("Fire2") && currentLookedObject != null && Holding!="LSD" && Holding != "Spray")
         {
-            animator.SetTrigger("grab");
 
+            animator.SetTrigger("grab");
             Holding = currentLookedObject.tag;  // store tag
             Destroy(currentLookedObject.transform.root.gameObject);      // delete object
             animator.SetBool("Holding",true);
             heldItem.SetActive(true);
             if (Holding == "LSD") { LSD.SetActive(true); Spray.SetActive(false); }
             else { LSD.SetActive(false); Spray.SetActive(true); }
-
-
             currentLooked = null;
             currentLookedObject = null;
         }
@@ -85,11 +85,15 @@ public class CameraDetect : MonoBehaviour
             if (Holding == null) return;
             if(Holding == "LSD")
             {
+                AudioSource.resource = AudioClips[0];
+                AudioSource.Play();
                 animator.SetTrigger("Drinking");
                 FirstPersonController.walkSpeed = 2;
             }
             if (Holding == "Spray")
             {
+                AudioSource.clip = AudioClips[1];
+                AudioSource.Play();
                 Instantiate(spray, sprayPoint.transform.position, sprayPoint.transform.rotation, sprayPoint.transform);
                 animator.SetTrigger("Spraying");
                 FirstPersonController.walkSpeed = 2;
@@ -141,5 +145,6 @@ public class CameraDetect : MonoBehaviour
 
         Holding = null;
     }
+
 
 }

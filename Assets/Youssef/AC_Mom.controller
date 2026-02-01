@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33470bbcf35e8de45b35dab01086c991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  jumpScareDistance: 2
+  jumpScareDistance: 5
   sightRadius: 1000
   chasingSpeed: 4
   sightAngle: 300
@@ -531,7 +531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   hearingRange: 50
   minVolume: 0.1
-  probabilityOccurence: 1
+  probabilityOccurence: 15
   tresholdIndex: 4
   sightRadius: 50
   sightAngle: 140
