@@ -30,6 +30,11 @@ public class RadarController : MonoBehaviour
         mom = GameObject.FindWithTag("Mom").transform;
     }
 
+    private void Start()
+    {
+        RadiusScale = 0.5f;
+    }
+
     private void Update()
     {
         UpdateMomRadar();

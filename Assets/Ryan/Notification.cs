@@ -43,7 +43,8 @@ public class Notification : MonoBehaviour
 
     public void CancelTimer()
     {
-        StopCoroutine(lifeRoutine);
+        if (lifeRoutine != null)
+            StopCoroutine(lifeRoutine);
     }
 
     public float GetAge()
