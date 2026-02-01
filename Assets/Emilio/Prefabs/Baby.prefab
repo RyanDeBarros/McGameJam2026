@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7272672965045836815}
   - component: {fileID: 991682906109145857}
   - component: {fileID: 2735271896594802468}
+  - component: {fileID: 9171756065989194083}
   m_Layer: 0
   m_Name: Baby
   m_TagString: Baby
@@ -142,3 +143,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &9171756065989194083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4385692891125523078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba92d60dec3155b4b98e17742c143419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BabyMovement
+  hoverAmplitude: 0.5
+  hoverSpeed: 2
+  rotationSpeed: {x: 0, y: 90, z: 0}
