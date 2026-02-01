@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class StunnedBehavior : StateMachineBehaviour
 {
@@ -9,15 +10,19 @@ public class StunnedBehavior : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         time = 0f;
+        animator.SetBool("isPlayerSeen", false);
+        animator.SetBool("isPlayerHeard", false);
+        animator.SetBool("isPlayerVanished", false);
+        animator.SetBool("JumpScareTrigger", false);
+        animator.SetBool("isInvestigating", false);
+        NavMeshAgent agent = animator.GetComponent<NavMeshAgent>();
+        agent.ResetPath();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        time += Time.deltaTime;
-        if (time > stunTime) {
-            animator.SetBool("isStunned", false);
-        }
+        
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
