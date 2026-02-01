@@ -1,10 +1,13 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class JumpScareBehavior : StateMachineBehaviour
 {
+    public AudioClip screamAudio;
+
     public float jumpScareDuration = 2f;
 
     private GameObject player;
@@ -21,7 +24,8 @@ public class JumpScareBehavior : StateMachineBehaviour
         player.transform.position = camPoint.position;
         player.transform.rotation = camPoint.rotation;
         player.GetComponent<Rigidbody>().useGravity = false;
-        
+        agent.GetComponent<AudioSource>().clip = screamAudio;
+        agent.GetComponent<AudioSource>().Play();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
