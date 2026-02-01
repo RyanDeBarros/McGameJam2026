@@ -241,6 +241,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 27054839630182945, guid: 062d7e38cf8ab2f429ac36c3de7ed187, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 27054839630182945, guid: 062d7e38cf8ab2f429ac36c3de7ed187, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 173871660105387901, guid: 062d7e38cf8ab2f429ac36c3de7ed187, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -789,6 +797,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 7464368614851302237, guid: 062d7e38cf8ab2f429ac36c3de7ed187, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7666480443309196176, guid: 062d7e38cf8ab2f429ac36c3de7ed187, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -796,6 +808,10 @@ PrefabInstance:
     - target: {fileID: 7708020606685146422, guid: 062d7e38cf8ab2f429ac36c3de7ed187, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7929758781797700625, guid: 062d7e38cf8ab2f429ac36c3de7ed187, type: 3}
+      propertyPath: maxLoudness
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8114547413786488232, guid: 062d7e38cf8ab2f429ac36c3de7ed187, type: 3}
       propertyPath: m_Layer
@@ -985,6 +1001,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 784738815497113445, guid: 426fc20c1fd5f9043af8c7a78336b5b0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -14.9999695
+      objectReference: {fileID: 0}
     - target: {fileID: 1798463495043690507, guid: 426fc20c1fd5f9043af8c7a78336b5b0, type: 3}
       propertyPath: flashlight
       value: 
@@ -1504,6 +1524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6dad9b70f5f97b45a18077820884828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MicInputAction
+  loudness: 0
   loudnessThreshold: 0.03
   momAi: {fileID: 1993836169}
   momCooldown: 0.5
