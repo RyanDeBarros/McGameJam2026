@@ -54,7 +54,7 @@ public class DoorTrigger : MonoBehaviour
         blackScreen.SetActive(true);
         yield return new WaitForSeconds(duration);
 
-       // ChangeScene();
+        ChangeScene();
     }
 
     private void ChangeScene()

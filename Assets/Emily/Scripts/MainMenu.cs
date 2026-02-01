@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject horseScreen;
+    [SerializeField] private GameObject credits;
 
     public void Play()
     {
@@ -12,7 +14,7 @@ public class MainMenu : MonoBehaviour
 
     public void Credits()
     {
-        //TODO
+        credits.SetActive(true);
     }
 
     public void Exit()
