@@ -19,6 +19,7 @@ public class JumpScareBehavior : StateMachineBehaviour
         Transform camPoint = animator.transform.Find("JumpscareCameraPoint");
         cam.transform.position = camPoint.position;
         cam.transform.rotation = camPoint.rotation;
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

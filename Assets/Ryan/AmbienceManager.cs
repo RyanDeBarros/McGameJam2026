@@ -53,6 +53,10 @@ public class AmbienceManager : MonoBehaviour
 
     public void Play(AmbienceIntensity intensity)
     {
+        if (this.intensity == intensity)
+        {
+            return;
+        }
         PlayRandomClip(intensity switch
         {
             AmbienceIntensity.Low => intense1AudioClips,
@@ -60,6 +64,7 @@ public class AmbienceManager : MonoBehaviour
             AmbienceIntensity.High => intense3AudioClips,
             _ => throw new System.NotImplementedException()
         });
+
         this.intensity = intensity;
         switchTrackDuration = Random.Range(switchTrackDurationMin, switchTrackDurationMax);
     }
