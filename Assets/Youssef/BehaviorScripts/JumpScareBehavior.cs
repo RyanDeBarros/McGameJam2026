@@ -25,8 +25,10 @@ public class JumpScareBehavior : StateMachineBehaviour
         player.transform.position = camPoint.position;
         player.transform.rotation = camPoint.rotation;
         player.GetComponent<Rigidbody>().useGravity = false;
-        agent.GetComponent<AudioSource>().clip = screamAudio;
-        agent.GetComponent<AudioSource>().Play();
+
+        AudioSource audioSource = animator.GetComponent<AudioSource>();
+        audioSource.clip = screamAudio;
+        audioSource.PlayOneShot(screamAudio);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -23,6 +23,8 @@ public class CameraDetect : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             DropItem();
+            AudioSource.clip = AudioClips[2];
+            AudioSource.Play();
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -70,7 +72,8 @@ public class CameraDetect : MonoBehaviour
         // GRAB LOGIC
         if (Input.GetButtonDown("Fire2") && currentLookedObject != null && Holding!="LSD" && Holding != "Spray")
         {
-
+            AudioSource.clip = AudioClips[3];
+            AudioSource.Play();
             animator.SetTrigger("grab");
             Holding = currentLookedObject.tag;  // store tag
             Destroy(currentLookedObject.transform.root.gameObject);      // delete object
