@@ -10,6 +10,7 @@ using System.Diagnostics;
 
 public class MainMenu : MonoBehaviour
 {
+
     [Header("UI Panels")]
     public GameObject creditsPanel;
 
@@ -17,11 +18,14 @@ public class MainMenu : MonoBehaviour
     void RunExe()
     {
         string exePath = System.IO.Path.Combine(
-        Application.dataPath,
-        "../Assets/Nia/Popup 4th Wall/popup.exe");
+        Application.streamingAssetsPath,
+        "popup.exe");
 
     Process.Start(exePath);
     }
+
+
+
 
     public void PlayGame()
     {
@@ -31,8 +35,13 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame()
     {
+
+        #if UNITY_STANDALONE_WIN
+           RunExe();
+        #endif
         Application.Quit();
-        RunExe();
+
+
     }
 
 
