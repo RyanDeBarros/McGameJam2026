@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Audio;
 
 public class WalkingBehavior : StateMachineBehaviour
 {
+    public AudioResource screamAudio;
     public float stoppingDistance = 1.2f;
     public float WalkingSpeed = 1.5f;
     public float sightRadius = 5f;
@@ -23,6 +25,7 @@ public class WalkingBehavior : StateMachineBehaviour
         lastPositionPlayer = player.transform.position;
         agent.speed = WalkingSpeed;
         time = 0;
+        AmbienceManager.GetInstance().Play(AmbienceIntensity.Low);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

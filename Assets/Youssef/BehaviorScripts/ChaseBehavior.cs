@@ -37,6 +37,7 @@ public class ChaseBehavior : StateMachineBehaviour
             }
         }else {
             animator.SetBool("isPlayerSeen", false);
+            AmbienceManager.GetInstance().Play(AmbienceIntensity.Medium);
         }
     }
     private bool isPlayerSeen()

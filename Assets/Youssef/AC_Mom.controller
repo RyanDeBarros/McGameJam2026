@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 075811a9d83536c459b7c23c5baf44e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JumpScareBehavior
+  screamAudio: {fileID: 8300000, guid: f1db9435d4326534e89563177e96969c, type: 3}
   jumpScareDuration: 5
 --- !u!1101 &-7937645965559965729
 AnimatorStateTransition:
@@ -264,7 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33470bbcf35e8de45b35dab01086c991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  jumpScareDistance: 2
+  jumpScareDistance: 5
   sightRadius: 1000
   chasingSpeed: 4
   sightAngle: 300
@@ -289,6 +290,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: isPlayerHeard
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   - m_Name: isPlayerVanished
     m_Type: 4
     m_DefaultFloat: 0
@@ -308,12 +315,6 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: stunTrigger
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: HeardTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -344,6 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adee087c7354b524ab6cc00715c8af28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  screamAudio: {fileID: 0}
   stoppingDistance: 1.2
   WalkingSpeed: 1.5
   sightRadius: 5
@@ -385,7 +387,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: HeardTrigger
+    m_ConditionEvent: isPlayerHeard
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4727536719668599080}
@@ -529,7 +531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   hearingRange: 50
   minVolume: 0.1
-  probabilityOccurence: 100
+  probabilityOccurence: 15
   tresholdIndex: 4
   sightRadius: 50
   sightAngle: 140
