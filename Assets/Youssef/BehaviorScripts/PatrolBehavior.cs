@@ -1,49 +1,66 @@
+using System.Collections.Generic;
+using System.Linq;
+using Unity.Mathematics;
+using Unity.VisualScripting;
+using UnityEditor.Rendering.Universal;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
-public class ChaseBehavior : StateMachineBehaviour
+public class PatrolBehavior : StateMachineBehaviour
 {
-    public float jumpScareDistance = 10.0f;
+    public float hearingRange = 10.0f;
+    public float minVolume = 0.1f;
+
+
+    public int tresholdIndex = 4;
     public float sightRadius = 5f;
     [Range(0, 360)]
     public float sightAngle = 100f;
     public LayerMask targetMask; //set layers in scene
     public LayerMask obstructionMask; //set layers in scene
 
+
+    private List<GameObject> navPoints;
     private GameObject player;
     private NavMeshAgent agent;
-    private Vector3 lastPositionPlayer;
-
-
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player = GameObject.FindGameObjectWithTag("MC");
+        player = GameObject.FindGameObjectWithTag("Player");
         agent = animator.GetComponent<NavMeshAgent>();
+        navPoints = GameObject.FindGameObjectsWithTag("navPoint").ToList();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        lastPositionPlayer = player.transform.position;
-        if (!isPlayerSeen())
-        { 
-            agent.SetDestination(lastPositionPlayer);
-            if (Vector3.Distance(agent.transform.position, lastPositionPlayer) <= jumpScareDistance) { 
+        navPoints.Sort((nav1, nav2) => {
+            float dist1 = (player.transform.position - nav1.transform.position).sqrMagnitude;
+            float dist2 = (player.transform.position - nav2.transform.position).sqrMagnitude;
+            return dist1.CompareTo(dist2);
+        });
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            agent.SetDestination(navPoints[UnityEngine.Random.Range(0, math.clamp(tresholdIndex, 0, navPoints.Count()))].transform.position);
+        }
 
-            }
+        if (isPlayerSeen())
+        {
+            animator.SetBool("isPlayerSeen", true);
+        } else if (HeardSound()) {
+            animator.SetBool("isPlayerHeard", true);
         }
-        else {
-            animator.SetBool("isPlayerSeen", false);
-        }
+        
     }
+    //This functions is used in three diff behavior scripts. for now keep it like that.
     private bool isPlayerSeen()
     {
         Collider[] rangeChecks = Physics.OverlapSphere(agent.transform.position, sightRadius, targetMask);
 
         if (rangeChecks.Length != 0)
         {
-            //only possible to get a player
+            //only possible to get a player, using first index
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - agent.transform.position).normalized;
 
@@ -58,6 +75,28 @@ public class ChaseBehavior : StateMachineBehaviour
 
         return false;
     }
+    public bool HeardSound()
+    {
+        AudioSource[] sources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+
+        foreach (AudioSource source in sources.Where(x => !this.GetComponentsInChildren<AudioSource>().Contains(x)))
+        {
+            if (!source.isPlaying) continue;
+
+            float distance = Vector3.Distance(agent.transform.position, source.transform.position);
+            float perceivedVolume = source.volume / Mathf.Max(distance, 1f);
+
+            if (distance <= hearingRange && perceivedVolume >= minVolume)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+
+
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
@@ -75,4 +114,4 @@ public class ChaseBehavior : StateMachineBehaviour
     //{
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
-}
+
