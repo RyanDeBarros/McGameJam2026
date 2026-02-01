@@ -28,8 +28,10 @@ public class JumpScareBehavior : StateMachineBehaviour
         Time.timeScale = 0f;
         if (time > jumpScareDuration)
         {
+            Time.timeScale = 1f;
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
             //disable input
+
         }
         
     }

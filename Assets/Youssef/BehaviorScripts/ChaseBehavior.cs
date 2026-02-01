@@ -33,7 +33,7 @@ public class ChaseBehavior : StateMachineBehaviour
             agent.SetDestination(lastPositionPlayer); 
             
             if (Vector3.Distance(agent.transform.position, lastPositionPlayer) <= jumpScareDistance) {
-                animator.SetBool("JumpScareTrigger", true);
+                animator.SetTrigger("JumpScareTrigger");
             }
         }else {
             animator.SetBool("isPlayerSeen", false);

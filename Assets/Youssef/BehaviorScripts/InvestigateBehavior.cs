@@ -34,7 +34,7 @@ public class InvestigateBehavior : StateMachineBehaviour
             //animator.transform.Rotate(0.0f, Time.deltaTime * rotationRate, 0.0f);
             if (time > investigationTime) {
             animator.SetBool("isInvestigating", false); //reseting the investigation
-            animator.SetBool("isPlayerVanished", true);
+            animator.SetTrigger("PlayerVanishedTrigger");
             return;
             }
         if (isPlayerSeen())
