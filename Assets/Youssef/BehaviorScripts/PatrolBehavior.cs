@@ -20,7 +20,6 @@ public class PatrolBehavior : StateMachineBehaviour
     public LayerMask targetMask; //set layers in scene
     public LayerMask obstructionMask; //set layers in scene
 
-
     private List<GameObject> navPoints;
     private GameObject player;
     private NavMeshAgent agent;
@@ -75,16 +74,16 @@ public class PatrolBehavior : StateMachineBehaviour
 
         return false;
     }
+
     public bool HeardSound()
     {
-        AudioSource[] sources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
-
-        foreach (AudioSource source in sources.Where(x => !this.GetComponentsInChildren<AudioSource>().Contains(x)))
+        foreach (ObstacleSound source in FindObjectsByType<ObstacleSound>(FindObjectsSortMode.None))
         {
-            if (!source.isPlaying) continue;
+            if (!source.GetAudioSource().isPlaying) continue;
 
             float distance = Vector3.Distance(agent.transform.position, source.transform.position);
-            float perceivedVolume = source.volume / Mathf.Max(distance, 1f);
+            float t = Mathf.InverseLerp(source.GetAudioSource().maxDistance, source.GetAudioSource().minDistance, distance);
+            float perceivedVolume = source.GetAudioSource().volume * Mathf.Clamp01(t);
 
             if (distance <= hearingRange && perceivedVolume >= minVolume)
             {
