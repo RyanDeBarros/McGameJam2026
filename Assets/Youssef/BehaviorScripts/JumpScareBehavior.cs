@@ -24,13 +24,15 @@ public class JumpScareBehavior : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        time += Time.unscaledDeltaTime;
-        Time.timeScale = 0f;
+        time += Time.deltaTime;
+        
+        player.GetComponent<FirstPersonController>().cameraCanMove = false;
         if (time > jumpScareDuration)
         {
             Time.timeScale = 1f;
+            player.GetComponent<FirstPersonController>().cameraCanMove = true;
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-            //disable input
+            
 
         }
         
