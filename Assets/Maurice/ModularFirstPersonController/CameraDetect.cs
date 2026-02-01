@@ -22,6 +22,14 @@ public class CameraDetect : MonoBehaviour
         {
             DropItem();
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            animator.SetTrigger("Finger");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            animator.SetTrigger("John");
+        }
         if ( speedTimer > 0 ) 
             speedTimer -= Time.deltaTime;
         else

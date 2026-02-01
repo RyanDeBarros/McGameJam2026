@@ -11,4 +11,5 @@ public class MomScript : MonoBehaviour
             gameObject.GetComponent<Animator>().SetTrigger(booleanString);
         }
     }
+    
 }
