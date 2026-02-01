@@ -20,7 +20,6 @@ public class PatrolBehavior : StateMachineBehaviour
     public LayerMask targetMask; //set layers in scene
     public LayerMask obstructionMask; //set layers in scene
 
-
     private List<GameObject> navPoints;
     private GameObject player;
     private NavMeshAgent agent;
@@ -75,6 +74,7 @@ public class PatrolBehavior : StateMachineBehaviour
 
         return false;
     }
+
     public bool HeardSound()
     {
         AudioSource[] sources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);

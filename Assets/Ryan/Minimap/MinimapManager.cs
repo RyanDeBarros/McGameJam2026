@@ -98,6 +98,7 @@ public class MinimapManager : MonoBehaviour
             playerDot = Instantiate(playerDotPrefab, iconParent);
             playerDot.gameObject.SetActive(true);
             if (!scaleDotWithPanel) playerDot.sizeDelta = playerDotSize;
+            playerDot.transform.localPosition = new(0f, 0f, -0.5f);
         }
     }
 
