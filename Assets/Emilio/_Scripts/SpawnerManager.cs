@@ -23,7 +23,7 @@ public class SpawnerManager : MonoBehaviour
         //Debug.Log("Found " + SpawnersDetected.Length);
 
         //Random value between 3 and the number of Spawners found 
-        Amount = Random.Range(3, SpawnersDetected.Count);
+        Amount = Random.Range(5, SpawnersDetected.Count);
 
         Amount = Mathf.Min(Amount, SpawnersDetected.Count);
 
