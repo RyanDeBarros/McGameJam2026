@@ -85,7 +85,6 @@ public class PatrolBehavior : StateMachineBehaviour
             float t = Mathf.InverseLerp(source.GetAudioSource().maxDistance, source.GetAudioSource().minDistance, distance);
             float perceivedVolume = source.GetAudioSource().volume * Mathf.Clamp01(t);
 
-            Debug.Log($"distance = {distance}, perceivedVolume = {perceivedVolume}");
             if (distance <= hearingRange && perceivedVolume >= minVolume)
             {
                 return true;
