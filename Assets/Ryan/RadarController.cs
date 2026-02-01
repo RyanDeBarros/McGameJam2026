@@ -90,5 +90,4 @@ public class RadarController : MonoBehaviour
         _radiusScale = radiusScale;
         mapFog.localScale = new(radiusScale, radiusScale, 1f);
     }
-
 }
