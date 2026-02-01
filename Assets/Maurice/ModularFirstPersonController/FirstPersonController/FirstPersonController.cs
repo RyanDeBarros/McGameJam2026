@@ -13,7 +13,7 @@ public class FirstPersonController : MonoBehaviour
 {
     public bool lsd_mode;
     private Rigidbody rb;
-
+    public static bool disable = false;
 
     public Camera playerCamera;
 
@@ -78,8 +78,9 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
+        if (disable) return;
         // Control camera movement
-        if(cameraCanMove)
+        if (cameraCanMove)
         {
             yaw = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseSensitivity;
 
@@ -102,7 +103,8 @@ public class FirstPersonController : MonoBehaviour
     }
 
     void FixedUpdate()
-    { 
+    {
+        if (disable) return;
         if (playerCanMove)
         {
             // Calculate how fast we should be moving
