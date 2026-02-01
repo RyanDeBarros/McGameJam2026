@@ -426,33 +426,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstPersonController
       objectReference: {fileID: 0}
-    - target: {fileID: 5581907474041838799, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7236854264960532526, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
-      propertyPath: m_Color.b
-      value: 0.7012578
-      objectReference: {fileID: 0}
-    - target: {fileID: 7236854264960532526, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
-      propertyPath: m_Color.g
-      value: 0.9468163
-      objectReference: {fileID: 0}
-    - target: {fileID: 7236854264960532526, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7236854264960532526, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
-      propertyPath: m_Intensity
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 7236854264960532526, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
-      propertyPath: m_SpotAngle
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 7236854264960532526, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
-      propertyPath: m_InnerSpotAngle
-      value: 45
+    - target: {fileID: 4459864850019384750, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -558,10 +534,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 784738815497113445, guid: 426fc20c1fd5f9043af8c7a78336b5b0, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -15
-      objectReference: {fileID: 0}
     - target: {fileID: 1798463495043690507, guid: 426fc20c1fd5f9043af8c7a78336b5b0, type: 3}
       propertyPath: flashlight
       value: 
