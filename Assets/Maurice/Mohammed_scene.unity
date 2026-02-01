@@ -24441,7 +24441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6dad9b70f5f97b45a18077820884828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MicInputAction
-  loudnessThreshold: 0.03
+  loudnessThreshold: 0.3
   momAi: {fileID: 1993836169}
   momCooldown: 0.5
 --- !u!114 &1539977179
