@@ -2,15 +2,12 @@ using UnityEngine;
 
 public class FogClearing : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float minDensity = 0.01f;
+    [SerializeField] private float maxDensity = 0.05f;
+    [SerializeField] private float speed = 1f;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        RenderSettings.fogDensity = Mathf.Lerp(minDensity, maxDensity, Mathf.PingPong(Time.time * speed, 1f));
     }
 }
