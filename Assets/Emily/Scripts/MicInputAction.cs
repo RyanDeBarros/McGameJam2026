@@ -14,7 +14,7 @@ public class MicInputAction : MonoBehaviour
     void Update()
     {
         float loudness = GetMicLoudness();
-
+        Debug.Log(loudness);
         if (loudness > loudnessThreshold && Time.time > lastSpawn)
         {
             BringMomToPosition();
