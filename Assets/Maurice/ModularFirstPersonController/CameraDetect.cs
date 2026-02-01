@@ -117,7 +117,7 @@ public class CameraDetect : MonoBehaviour
         if (prefabToSpawn != null)
         {
             Vector3 spawnPosition = transform.position + transform.forward * 1.5f;
-            spawnPosition.y = 0.85f; // slight lift
+            spawnPosition.y = 19.75f; // slight lift
 
             Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
         }
