@@ -8,6 +8,7 @@ TagManager:
   - Spawner
   - navPoint
   - Mom
+  - Branch
   layers:
   - Default
   - TransparentFX
