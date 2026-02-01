@@ -4641,6 +4641,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5471383285713123922, guid: 062d7e38cf8ab2f429ac36c3de7ed187, type: 3}
+      propertyPath: m_TagString
+      value: Arms
+      objectReference: {fileID: 0}
     - target: {fileID: 5706501545162218846, guid: 062d7e38cf8ab2f429ac36c3de7ed187, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 57.116013
