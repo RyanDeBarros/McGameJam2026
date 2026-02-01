@@ -121,7 +121,7 @@ public class NotificationManager : MonoBehaviour
     public static void NotifyBabyCollection(int babiesLeft)
     {
         if (GetInstance().enableNonTutorial)
-            GetInstance().Notify($"You collected another baby. You have {babiesLeft} bab{(babiesLeft != 1 ? "ies" : "y")} left.");
+            GetInstance().Notify($"{babiesLeft} bab{(babiesLeft != 1 ? "ies" : "y")} left!");
     }
 
     public static void NotifyBabyCompletion()
