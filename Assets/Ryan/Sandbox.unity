@@ -473,10 +473,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 784738815497113445, guid: 426fc20c1fd5f9043af8c7a78336b5b0, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -15
-      objectReference: {fileID: 0}
     - target: {fileID: 6654940951290440366, guid: 426fc20c1fd5f9043af8c7a78336b5b0, type: 3}
       propertyPath: m_Name
       value: Phone
