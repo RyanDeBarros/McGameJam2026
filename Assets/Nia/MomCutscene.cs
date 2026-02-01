@@ -5,7 +5,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     void NextScene()
     {
-        //  SceneManager.LoadScene(__REPLACE__);
+        SceneManager.LoadScene("Mohammed_scene");
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

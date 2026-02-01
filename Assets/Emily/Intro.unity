@@ -3738,7 +3738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eacc4887dcf1404385b31c432786a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorTrigger
-  sceneName: Mohammed_scene
+  sceneName: intro_talk
   duration: 1
   blackScreen: {fileID: 283959107}
   text: {fileID: 1730213107}
