@@ -2,7 +2,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-// Start is called once before the first execution of Update after the MonoBehaviour is created
 
 
 public class DifficultySpeedChanger : MonoBehaviour
@@ -24,8 +23,10 @@ public void OnBabyIncrease(int UpdatedBabies)
     {
         PrevBabyCount = UpdatedBabies; 
 
-        animator.GetBehaviour<ChaseBehavior>().chasingSpeed  *= Multiplier;
-        animator.GetBehaviour<WalkingBehavior>().WalkingSpeed *= Multiplier;
+        animator.GetBehaviour<ChaseBehavior>().chasingSpeed = Mathf.Clamp(animator.GetBehaviour<ChaseBehavior>().chasingSpeed* Multiplier , MinSpeed, MaxSpeed);
+        animator.GetBehaviour<WalkingBehavior>().WalkingSpeed = Mathf.Clamp(animator.GetBehaviour<WalkingBehavior>().WalkingSpeed* Multiplier , MinSpeed, MaxSpeed);
+        animator.GetBehaviour<PatrolBehavior>().probabilityOccurence = Mathf.Clamp(1/ (animator.GetBehaviour<PatrolBehavior>().probabilityOccurence + 1) , 1, 5);
+        
     }
     void Update()
     {
@@ -34,6 +35,6 @@ public void OnBabyIncrease(int UpdatedBabies)
 
         }
 
-        float xPos = Mathf.Clamp(animator.GetBehaviour<ChaseBehavior>().chasingSpeed , MinSpeed, MaxSpeed);
+        
     }
 }
